@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -6,17 +6,39 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import io from "socket.io-client";
 import { FriendsList } from "./components/dashboard/friendslist/FriendsList";
-
+import Modal from "react-modal";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
+  const customStylesModal = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: "350px",
+      transform: "translate(-50%, -50%)",
+    },
+    overlay: {
+      backgroundColor: "rgba(255, 255, 255, 0.15)",
+    },
+  };
+  const [serverModal, setServerModal] = React.useState(false);
   return (
     <div className="App">
+      <Modal
+        style={customStylesModal}
+        onRequestClose={() => setServerModal(false)}
+        isOpen={serverModal}
+      >
+        <h2>Modal Title</h2>
+        <p>Modal Body</p>
+      </Modal>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/" element={<Dashboard />}>
+        <Route path="/" element={<Dashboard setServerModal={setServerModal} />}>
           <Route path="me/friends" element={<FriendsList />} />
           <Route path="me/messages" element={<h1>Messages</h1>} />
           <Route path="servers/:id" element={<h1>Server</h1>} />

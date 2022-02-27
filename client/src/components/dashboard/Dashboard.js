@@ -5,7 +5,7 @@ import "./dashboard.css";
 import HomeIcon from "@mui/icons-material/Home";
 import { GroupItem } from "./GroupItem";
 
-function Dashboard() {
+function Dashboard({ setServerModal }) {
   const [selectedGroup, setSelectedGroup] = useState("home");
 
   // to check if it equals the home page  /me/
@@ -45,6 +45,12 @@ function Dashboard() {
               />
             );
           })}
+          <GroupItem
+            selected={selectedGroup}
+            setSelectedGroup={setSelectedGroup}
+            name="add"
+            setServerModal={setServerModal}
+          />
         </div>
       </div>
       <div className="leftDashboard">

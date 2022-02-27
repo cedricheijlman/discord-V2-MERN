@@ -5,8 +5,8 @@ export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
 
   const friends = [
-    { name: "cchd", online: "false" },
-    { name: "cchd", online: "true" },
+    { name: "cchd", online: false },
+    { name: "cchd", online: true },
   ];
 
   return (
@@ -38,12 +38,22 @@ export const FriendsList = () => {
         {friendsOption == "All" && (
           <>
             <input placeholder="Search" />
+            {friends.length > 0 &&
+              friends.map((friend) => {
+                return <h1>{friend.name}</h1>;
+              })}
           </>
         )}
 
         {friendsOption == "Online" && (
           <>
             <input placeholder="Search" />
+            {friends.length > 0 &&
+              friends
+                .filter((f) => f.online == true)
+                .map((friend) => {
+                  return <h1>{friend.name}</h1>;
+                })}
           </>
         )}
 
