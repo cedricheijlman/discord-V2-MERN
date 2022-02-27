@@ -1,0 +1,77 @@
+#dashboard {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+/* dashboard left */
+
+.groupsLeftDashboard {
+  width: 5%;
+  min-width: 80px;
+  background-color: rgb(39, 42, 44);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leftDashboard {
+  background-color: rgb(44, 47, 49);
+  height: 100vh;
+  width: 20%;
+  padding-top: 10px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard__homeButton {
+  color: rgb(133, 132, 197);
+  background-color: rgb(55, 59, 68);
+  padding: 15px;
+  font-size: 22px !important;
+  display: flex;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.dashboard__homeButtonSelect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+
+  width: 100%;
+}
+
+.joinedGroupsDashboard {
+  width: 100%;
+  margin-top: 15px;
+  border-top: 2px solid rgba(51, 51, 58, 0.418);
+}
+
+/* 
+Info
+*/
+
+.friendsItem {
+  border: 1px solid rgb(98, 90, 90);
+  border-radius: 10px;
+  margin: 5px 0;
+  width: 90%;
+  color: white;
+  padding: 10px 15px;
+}
+
+/*
+ dashboard right
+*/
+
+.rightDashboard {
+  width: 75%;
+  height: 100vh;
+  background-color: rgb(47, 49, 51);
+}

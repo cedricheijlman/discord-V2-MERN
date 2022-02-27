@@ -1,0 +1,70 @@
+#friendsList {
+  display: flex;
+
+  height: 100%;
+  padding: 20px;
+  flex-direction: column;
+  color: white;
+}
+
+.friendsList__options {
+  display: flex;
+}
+
+.friendsList__options p {
+  border: 2px solid rgb(75, 74, 74);
+  padding: 4px 10px;
+  margin-right: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s !important;
+}
+
+.selectedFriends {
+  transform: scale(1.1);
+  background-color: rgb(71, 74, 80);
+}
+
+.friends__containerBottom {
+  height: 100%;
+
+  margin: 15px 0;
+}
+
+#friendsList input {
+  width: 90%;
+  border: none;
+  padding: 10px;
+  border-radius: 3px;
+  color: white !important;
+  background-color: rgb(84, 85, 95);
+}
+
+#friendsList input:focus {
+  border: none;
+  outline: none;
+}
+
+#friendsList input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(170, 169, 169);
+  opacity: 1; /* Firefox */
+}
+
+#friendsList input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgb(170, 169, 169);
+}
+
+#friendsList input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgb(170, 169, 169);
+}
+
+.addFriendSearch {
+  margin-top: 15px;
+  height: 50px;
+  font-size: 16px;
+}
