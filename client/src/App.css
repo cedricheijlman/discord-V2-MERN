@@ -13,6 +13,20 @@ Create Server Modal
 .createServerForm {
   width: 100%;
   height: 100%;
+  padding-top: 16px;
+}
+
+.createServerForm .closeIcon {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  color: grey;
+  transition: all 0.4s;
+}
+
+.createServerForm .closeIcon:hover {
+  color: black;
+  cursor: pointer;
 }
 
 .form input {
@@ -20,14 +34,16 @@ Create Server Modal
   margin-bottom: 20px;
   padding: 15px;
   width: 100%;
+  border-radius: 3px;
   border: 1px solid rgb(190, 189, 189);
 }
 
 .form h5 {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
   color: rgb(82, 80, 80);
+  text-transform: uppercase;
 }
 
 .form button {

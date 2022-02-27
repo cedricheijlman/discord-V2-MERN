@@ -7,7 +7,7 @@ import Register from "./components/register/Register";
 import io from "socket.io-client";
 import { FriendsList } from "./components/dashboard/friendslist/FriendsList";
 import Modal from "react-modal";
-
+import CloseIcon from "@mui/icons-material/Close";
 import { Switch } from "@mui/material";
 
 const socket = io.connect("http://localhost:3001");
@@ -19,7 +19,7 @@ function App() {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      width: "350px",
+      width: "390px",
       transform: "translate(-50%, -50%)",
       display: "flex",
       flexDirection: "column",
@@ -43,7 +43,15 @@ function App() {
         <h2>Create a server</h2>
         <p>A server is a place where you and your friends can meet.</p>
         <form className="createServerForm">
+          <CloseIcon
+            onClick={() => {
+              setServerModal(false);
+            }}
+            className="closeIcon"
+          />
           <div className="form">
+            <input type="file" id="myFile" name="filename" />
+
             <h5>Server Name</h5>
             <input placeholder="Server Name" />
             <div>
@@ -51,8 +59,6 @@ function App() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-
-                  padding: "3px",
                 }}
               >
                 <h5>Private?</h5>
