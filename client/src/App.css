@@ -25,7 +25,9 @@ Create Server Modal
 
 .form h5 {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 14px;
+  text-align: left;
+  color: rgb(82, 80, 80);
 }
 
 .form button {

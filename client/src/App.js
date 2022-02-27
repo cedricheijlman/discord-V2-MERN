@@ -47,7 +47,14 @@ function App() {
             <h5>Server Name</h5>
             <input placeholder="Server Name" />
             <div>
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+
+                  padding: "3px",
+                }}
+              >
                 <h5>Private?</h5>
                 <Switch
                   checked={toggled}
