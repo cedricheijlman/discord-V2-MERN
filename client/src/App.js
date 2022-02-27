@@ -20,7 +20,6 @@ function App() {
       right: "auto",
       bottom: "auto",
       width: "350px",
-      height: "400px",
       transform: "translate(-50%, -50%)",
       display: "flex",
       flexDirection: "column",
@@ -33,6 +32,7 @@ function App() {
   };
   const [serverModal, setServerModal] = React.useState(false);
   const [toggled, setToggled] = React.useState(false);
+
   return (
     <div className="App">
       <Modal
@@ -42,25 +42,29 @@ function App() {
       >
         <h2>Create a server</h2>
         <p>A server is a place where you and your friends can meet.</p>
-        <form style={{ width: "100%" }}>
-          <div
-            style={{
-              width: "100%",
-
-              display: "flex",
-              flexDirection: "column",
-              margin: "10px 0",
-            }}
-          >
-            <p>Server Name</p>
-            <input />
+        <form className="createServerForm">
+          <div className="form">
+            <h5>Server Name</h5>
+            <input placeholder="Server Name" />
             <div>
-              <p>Private Server</p>
-              <Switch
-                checked={toggled}
-                onChange={(e) => setToggled(e.target.checked)}
+              <div>
+                <h5>Private?</h5>
+                <Switch
+                  checked={toggled}
+                  onChange={(e) => setToggled(e.target.checked)}
+                />
+              </div>
+              <input
+                type={"password"}
+                placeholder={
+                  toggled == true
+                    ? "Enter Password"
+                    : "Turn private on to have a password!"
+                }
+                disabled={toggled == true ? false : true}
               />
             </div>
+            <button>Create Server</button>
           </div>
         </form>
       </Modal>

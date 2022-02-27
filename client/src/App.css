@@ -1,0 +1,41 @@
+/*
+Create Server Modal
+*/
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  height: 100%;
+}
+
+.createServerForm {
+  width: 100%;
+  height: 100%;
+}
+
+.form input {
+  margin: 10px 0;
+  margin-bottom: 20px;
+  padding: 15px;
+  width: 100%;
+  border: 1px solid rgb(190, 189, 189);
+}
+
+.form h5 {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.form button {
+  width: 100%;
+  border: none;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 5px;
+  height: 45px;
+  background-color: rgb(55, 55, 88);
+  color: rgb(255, 253, 253);
+}
