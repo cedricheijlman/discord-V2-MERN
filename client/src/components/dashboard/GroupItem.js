@@ -31,13 +31,15 @@ export const GroupItem = ({
 
   return (
     <div
-      onClick={() => {
-        handleClick(name);
-      }}
       style={{ borderLeft: selected == name ? "4px solid white" : "" }}
       className="dashboard__homeButtonSelect"
     >
-      <div className="dashboard__homeButton">
+      <div
+        onClick={() => {
+          handleClick(name);
+        }}
+        className="dashboard__homeButton"
+      >
         {name == "add" && <AddIcon />}
         {name == "home" && <HomeIcon />}
       </div>
