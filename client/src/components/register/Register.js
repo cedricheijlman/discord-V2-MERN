@@ -44,6 +44,8 @@ function Register() {
         username,
       }).then(async (result) => {
         if (result.status == 201) {
+          localStorage.setItem("accessKey", result.data.accessToken);
+          localStorage.setItem("userId", result.data.id);
           navigate("/dashboard");
         }
       });
