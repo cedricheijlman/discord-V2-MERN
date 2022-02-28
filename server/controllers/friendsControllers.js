@@ -3,6 +3,22 @@ const { ObjectId } = require("mongoose");
 const User = require("../models/users");
 const Friend = require("../models/friends");
 
+const allFriends = async (req, res) => {
+  try {
+    User.findOne({ _id: mongoose.Types.ObjectId("621d1a7a53051771bfa07d7c") })
+      .populate("friends")
+      .exec((err, friends) => {
+        if (err) {
+          console.log(err);
+        }
+        return res.status(200).json({ message: friends });
+      });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "error" });
+  }
+};
+
 const addFriend = async (req, res) => {
   try {
     const { user, friend } = req.body;
@@ -84,4 +100,5 @@ const addFriend = async (req, res) => {
 };
 module.exports = {
   addFriend,
+  allFriends,
 };

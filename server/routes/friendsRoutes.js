@@ -5,4 +5,6 @@ const controller = require("../controllers/friendsControllers");
 
 router.post("/addFriend", controller.addFriend);
 
+router.get("/allFriends", controller.allFriends);
+
 module.exports = router;
