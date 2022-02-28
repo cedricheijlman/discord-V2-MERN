@@ -32,7 +32,7 @@ function App() {
   };
   const [serverModal, setServerModal] = React.useState(false);
   const [toggled, setToggled] = React.useState(false);
-
+  Modal.setAppElement("#root");
   return (
     <div className="App">
       <Modal

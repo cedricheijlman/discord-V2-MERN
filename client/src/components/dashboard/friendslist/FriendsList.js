@@ -39,8 +39,8 @@ export const FriendsList = () => {
           <>
             <input placeholder="Search" />
             {friends.length > 0 &&
-              friends.map((friend) => {
-                return <h1>{friend.name}</h1>;
+              friends.map((friend, index) => {
+                return <h1 key={index}>{friend.name}</h1>;
               })}
           </>
         )}
@@ -51,8 +51,8 @@ export const FriendsList = () => {
             {friends.length > 0 &&
               friends
                 .filter((f) => f.online == true)
-                .map((friend) => {
-                  return <h1>{friend.name}</h1>;
+                .map((friend, index) => {
+                  return <h1 key={index}>{friend.name}</h1>;
                 })}
           </>
         )}
