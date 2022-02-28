@@ -54,6 +54,17 @@ const addFriend = async (req, res) => {
           { requestBy: objectIdFriend, requestTo: objectIdUser },
           { $set: { status: 2 } }
         );
+
+        const pushUser = await User.findOneAndUpdate(
+          { _id: objectIdUser },
+          { $push: { friends: objectIdFriend } }
+        );
+
+        const pushFriend = await User.findOneAndUpdate(
+          { _id: objectIdFriend },
+          { $push: { friends: objectIdUser } }
+        );
+
         return res.json({ message: test });
       }
     }
