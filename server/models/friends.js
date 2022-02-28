@@ -9,8 +9,8 @@ const friendsSchema = new mongoose.Schema(
       type: Number,
       enums: [
         0, //'add friend',
-        2, //'pending',
-        3, //'friends',
+        1, //'pending',
+        2, //'friends',
       ],
     },
   },
