@@ -7,19 +7,23 @@ const addFriend = async (req, res) => {
   try {
     const { user, friend } = req.body;
 
+    // create object ids
     const objectIdUser = mongoose.Types.ObjectId(user);
     const objectIdFriend = mongoose.Types.ObjectId(friend);
 
+    // check if user already sent a friend request
     const userRequestExists = await Friend.find({
       requestBy: objectIdUser,
       requestTo: objectIdFriend,
     });
 
+    // check if other user (friend) already sent a friend rewquest
     const friendRequestExists = await Friend.find({
       requestBy: objectIdFriend,
       requestTo: objectIdUser,
     });
 
+    // if someone already sent a friend request
     if (userRequestExists || friendRequestExists) {
       let userStatus = 0;
       let friendStatus = 0;
@@ -32,25 +36,29 @@ const addFriend = async (req, res) => {
         friendStatus = friendRequestExists[0].status;
       }
 
+      //  Check if status == 2 (friends)
       if (userStatus == 2 || friendStatus == 2) {
         return res.status(200).json({ message: "You already are Friends" });
       }
 
+      // Check if status == 1 (pending request)
       if (userStatus == 1) {
         return res
           .status(200)
           .json({ message: "You already sent a friend request" });
       }
 
+      // check if other user already sent friends request then* update request document to status: 2 (friends)
       if (friendStatus == 1) {
         const test = await Friend.updateOne(
-          { requestBy: objectIdFriend, requestTo: user },
+          { requestBy: objectIdFriend, requestTo: objectIdUser },
           { $set: { status: 2 } }
         );
         return res.json({ message: test });
       }
     }
 
+    // if no pending friend request and not already friends - Create NEW pending friend request
     const newRequest = await Friend.create({
       requestBy: mongoose.Types.ObjectId(user),
       requestTo: mongoose.Types.ObjectId(friend),
