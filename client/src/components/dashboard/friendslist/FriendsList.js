@@ -11,10 +11,15 @@ export const FriendsList = () => {
   useEffect(() => {
     Axios.post("http://localhost:3001/allFriends", {
       accessKey: localStorage.getItem("accessKey"),
-    }).then((result) => {
-      console.log(result.data.allFriends);
-      setAllFriends(result.data.allFriends);
-    });
+    })
+      .then((result) => {
+        setAllFriends(result.data.allFriends);
+        console.log(result);
+      })
+      .catch((err) => {
+        localStorage.removeItem("accessToken");
+        window.location.pathname("/login");
+      });
   }, []);
 
   const friends = [

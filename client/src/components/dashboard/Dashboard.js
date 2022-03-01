@@ -36,9 +36,10 @@ function Dashboard({ setServerModal }) {
           name="home"
         />
         <div className="joinedGroupsDashboard">
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
               <GroupItem
+                key={index}
                 selected={selectedGroup}
                 setSelectedGroup={setSelectedGroup}
                 name={item.name}

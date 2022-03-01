@@ -13,9 +13,6 @@ const allFriends = async (req, res) => {
       .select("-password")
       .populate("friends", "-password")
       .exec((err, friends) => {
-        if (err) {
-          console.log(err);
-        }
         return res.status(200).json({ allFriends: friends.friends });
       });
   } catch (err) {
