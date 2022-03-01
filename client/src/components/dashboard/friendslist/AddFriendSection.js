@@ -14,7 +14,6 @@ export const AddFriendSection = () => {
   };
 
   const handleAddFriend = () => {
-    console.log(addFriendInput);
     Axios.post("http://localhost:3001/addFriend", {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: addFriendInput,
@@ -47,10 +46,24 @@ export const AddFriendSection = () => {
           }}
         />
         <div className="knopDiv">
-          <button onClick={handleAddFriend}>Send Friend Request</button>
+          <button
+            className={
+              addFriendInput == "" || addFriendInput == null
+                ? "disabledAddFriend"
+                : ""
+            }
+            disabled={
+              addFriendInput !== "" && addFriendInput !== null ? false : true
+            }
+            onClick={handleAddFriend}
+          >
+            Send Friend Request
+          </button>
         </div>
       </div>
-      <p>{addFriendMessage}</p>
+      {addFriendMessage !== null && addFriendMessage !== "" && (
+        <p className="addFriendMessage">{addFriendMessage}</p>
+      )}
     </>
   );
 };

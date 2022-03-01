@@ -96,6 +96,11 @@ Add friends
   z-index: 99;
 }
 
+.disabledAddFriend {
+  background-color: transparent !important;
+  transform: scale(1) !important;
+}
+
 .knopDiv {
   width: 100%;
   position: absolute;
@@ -122,4 +127,18 @@ Add friends
 
 .addFriendInput button:hover {
   transform: scale(1.02);
+}
+
+.addFriendMessage {
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
