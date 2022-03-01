@@ -21,9 +21,7 @@ export const FriendsRequestsSection = () => {
       <div className="allFriendsContainer">
         {allFriendRequests.length > 0 &&
           allFriendRequests.map((request, index) => {
-            return (
-              <RequestCard key={index} username={request.requestBy.username} />
-            );
+            return <RequestCard key={index} request={request.requestBy} />;
           })}
       </div>
     </>
