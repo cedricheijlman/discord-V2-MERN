@@ -26,9 +26,15 @@ const allFriendRequests = async (req, res) => {
     const { accessKey } = req.body;
     const decodedJwt = jwt.decode(accessKey);
 
-    Friend.find({ requestTo: mongoose.Types.ObjectId(decodedJwt.id) });
-
-    return res.status(200).json({ message: "test" });
+    Friend.find({
+      requestTo: mongoose.Types.ObjectId(decodedJwt.id),
+      status: 1,
+    })
+      .select("-status -requestTo -_id")
+      .populate("requestBy", "-password -friends -email")
+      .exec((err, friends) => {
+        return res.status(200).json({ allRequests: friends });
+      });
   } catch (error) {
     return res.status(400).json({ message: "error" });
   }
