@@ -97,8 +97,8 @@ Add friends
 }
 
 .disabledAddFriend {
-  background-color: transparent !important;
   transform: scale(1) !important;
+  color: rgb(218, 218, 218) !important;
 }
 
 .knopDiv {
@@ -132,6 +132,8 @@ Add friends
 .addFriendMessage {
   animation-name: fadeIn;
   animation-duration: 0.3s;
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 @keyframes fadeIn {

@@ -1,0 +1,40 @@
+#requestCard {
+  padding: 20px 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  background-color: rgb(53, 55, 59);
+  border-radius: 4px;
+  margin: 15px 0;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  transition: all 0.3s;
+}
+
+#requestCard:hover {
+  cursor: pointer;
+  background-color: rgb(78, 80, 90);
+}
+
+.requestCard__left {
+  display: flex;
+  align-items: center;
+}
+
+.requestCard__left img {
+  margin-right: 15px;
+}
+
+.requestCard__right {
+  display: flex;
+}
+
+.requestCard__right button {
+  padding: 7px;
+  border-radius: 4px;
+  margin: 0 5px;
+  border: none;
+  background-color: rgb(48, 47, 56);
+  color: white;
+  cursor: pointer;
+}

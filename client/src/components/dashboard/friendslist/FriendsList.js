@@ -3,10 +3,12 @@ import "./friendslist.css";
 import Axios from "axios";
 import { FriendCard } from "./friendcard/FriendCard";
 import { AddFriendSection } from "./AddFriendSection";
+import { FriendsRequestsSection } from "./FriendsRequestsSection";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
   const [allFriends, setAllFriends] = useState([]);
+  const [allFriendRequests, setAllFriendsRequests] = useState([]);
 
   // Fetch Friends
   useEffect(() => {
@@ -29,15 +31,23 @@ export const FriendsList = () => {
       <div className="friendsList__options">
         <p
           onClick={() => setFriendsOption("All")}
-          className={friendsOption == "All" ? "selectedFriends" : ""}
+          className={friendsOption === "All" ? "selectedFriends" : ""}
         >
           All
         </p>
         <p
           onClick={() => setFriendsOption("Online")}
-          className={friendsOption == "Online" ? "selectedFriends" : ""}
+          className={friendsOption === "Online" ? "selectedFriends" : ""}
         >
           Online
+        </p>
+        <p
+          onClick={() => setFriendsOption("allFriendRequests")}
+          className={
+            friendsOption === "allFriendRequests" ? "selectedFriends" : ""
+          }
+        >
+          Friend Requests
         </p>
         <p
           style={{ backgroundColor: "#27ae60" }}
@@ -78,6 +88,8 @@ export const FriendsList = () => {
                 })}
           </>
         )}
+
+        {friendsOption == "allFriendRequests" && <FriendsRequestsSection />}
 
         {friendsOption == "AddFriend" && <AddFriendSection />}
       </div>

@@ -21,6 +21,19 @@ const allFriends = async (req, res) => {
   }
 };
 
+const allFriendRequests = async (req, res) => {
+  try {
+    const { accessKey } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+
+    Friend.find({ requestTo: mongoose.Types.ObjectId(decodedJwt.id) });
+
+    return res.status(200).json({ message: "test" });
+  } catch (error) {
+    return res.status(400).json({ message: "error" });
+  }
+};
+
 const deleteFriend = async (req, res) => {
   try {
     const { accessKey, friend } = req.body;
@@ -167,4 +180,5 @@ module.exports = {
   addFriend,
   deleteFriend,
   allFriends,
+  allFriendRequests,
 };
