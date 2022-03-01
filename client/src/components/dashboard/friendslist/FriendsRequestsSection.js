@@ -4,6 +4,7 @@ import { RequestCard } from "./requestcard/RequestCard";
 
 export const FriendsRequestsSection = () => {
   const [allFriendRequests, setAllFriendRequests] = useState([]);
+  const [change, setChange] = useState(0);
 
   useEffect(() => {
     console.log("hey");
@@ -13,7 +14,7 @@ export const FriendsRequestsSection = () => {
       console.log(res);
       setAllFriendRequests(res.data.allRequests);
     });
-  }, []);
+  }, [change]);
 
   return (
     <>
@@ -21,7 +22,14 @@ export const FriendsRequestsSection = () => {
       <div className="allFriendsContainer">
         {allFriendRequests.length > 0 &&
           allFriendRequests.map((request, index) => {
-            return <RequestCard key={index} request={request.requestBy} />;
+            return (
+              <RequestCard
+                setChange={setChange}
+                change={change}
+                key={index}
+                request={request.requestBy}
+              />
+            );
           })}
       </div>
     </>

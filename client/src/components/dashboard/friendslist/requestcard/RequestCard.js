@@ -2,7 +2,7 @@ import React from "react";
 import "./requestcard.css";
 import Axios from "axios";
 
-export const RequestCard = ({ request }) => {
+export const RequestCard = ({ request, setChange, change }) => {
   const handleAcceptRequest = () => {
     console.log(request._id);
     Axios.post("http://localhost:3001/addFriend", {
@@ -10,6 +10,7 @@ export const RequestCard = ({ request }) => {
       friendUsername: request.username,
     }).then((res) => {
       console.log(res);
+      setChange(change + 1);
     });
   };
 

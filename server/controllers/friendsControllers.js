@@ -104,12 +104,16 @@ const addFriend = async (req, res) => {
     }).select("-password");
 
     if (!findUsername) {
-      return res.status(200).json({ message: "Name doesn't exist" });
+      return res.status(200).json({ message: "Name doesn't exist!" });
     }
 
     // create object ids
     const objectIdUser = mongoose.Types.ObjectId(decodedJwt.id);
     const objectIdFriend = mongoose.Types.ObjectId(findUsername._id);
+
+    if (decodedJwt.id == findUsername._id) {
+      return res.status(200).json({ message: "You can't add yourself!" });
+    }
 
     // check if user already sent a friend request
     const userRequestExists = await Friend.find({
@@ -165,7 +169,7 @@ const addFriend = async (req, res) => {
           { $push: { friends: objectIdUser } }
         );
 
-        return res.status.json({ message: "You are now friends" });
+        return res.status(200).json({ message: "You are now friends" });
       }
     }
 
