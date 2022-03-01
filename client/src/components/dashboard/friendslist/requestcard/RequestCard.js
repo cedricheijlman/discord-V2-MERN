@@ -13,6 +13,18 @@ export const RequestCard = ({ request, setChange, change }) => {
     });
   };
 
+  const handleDeleteRequest = () => {
+    Axios.delete("http://localhost:3001/deleteFriend", {
+      data: {
+        accessKey: localStorage.getItem("accessKey"),
+        friend: request._id,
+      },
+    }).then((result) => {
+      console.log(result);
+      window.location.reload();
+    });
+  };
+
   return (
     <div id="requestCard">
       <div className="requestCard__left">
@@ -21,7 +33,7 @@ export const RequestCard = ({ request, setChange, change }) => {
       </div>
       <div className="requestCard__right">
         <button onClick={handleAcceptRequest}>Accept</button>
-        <button>Decline</button>
+        <button onClick={handleDeleteRequest}>Decline</button>
       </div>
     </div>
   );

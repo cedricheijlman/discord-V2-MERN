@@ -61,10 +61,6 @@ const deleteFriend = async (req, res) => {
       return res.status(404).json({ message: "no friendship" });
     }
 
-    if (findFriend.status == 1) {
-      return res.status(404).json({ message: "You are not friends" });
-    }
-
     const userObjectId = mongoose.Types.ObjectId(user);
     const friendObjectId = mongoose.Types.ObjectId(friend);
 
