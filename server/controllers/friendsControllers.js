@@ -6,12 +6,13 @@ const Friend = require("../models/friends");
 const allFriends = async (req, res) => {
   try {
     User.findOne({ _id: mongoose.Types.ObjectId("621d1a7a53051771bfa07d7c") })
-      .populate("friends")
+      .select("-password")
+      .populate("friends", "-password")
       .exec((err, friends) => {
         if (err) {
           console.log(err);
         }
-        return res.status(200).json({ message: friends });
+        return res.status(200).json({ allFriends: friends.friends });
       });
   } catch (err) {
     console.log(err);

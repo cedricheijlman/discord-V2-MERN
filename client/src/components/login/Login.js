@@ -28,6 +28,7 @@ function Login() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
+  // handle login
   const handleLogin = () => {
     console.log(email, password);
     if (email && password && email !== "" && password !== "") {

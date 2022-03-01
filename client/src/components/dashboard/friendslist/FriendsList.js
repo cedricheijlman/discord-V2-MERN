@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./friendslist.css";
+import Axios from "axios";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
+  const [allFriends, setAllFriends] = useState([]);
+
+  // Fetch Friends
+  useEffect(() => {
+    Axios.get("http://localhost:3001/allFriends").then((result) => {
+      console.log(result.data.allFriends);
+    });
+  }, []);
 
   const friends = [
     { name: "cchd", online: false },
