@@ -21,6 +21,14 @@ const allFriends = async (req, res) => {
   }
 };
 
+const removeFriend = async (req, res) => {
+  try {
+    return res.status(200).json({ message: "worked" });
+  } catch (error) {
+    return res.status(400).json({ message: "error" });
+  }
+};
+
 const addFriend = async (req, res) => {
   try {
     const { user, friend } = req.body;
@@ -102,5 +110,6 @@ const addFriend = async (req, res) => {
 };
 module.exports = {
   addFriend,
+  removeFriend,
   allFriends,
 };
