@@ -44,7 +44,21 @@ const removeFriend = async (req, res) => {
       return res.status(404).json({ message: "You are not friends" });
     }
 
-    const deleteOn = await Friend.deleteOne({
+    const userObjectId = mongoose.Types.ObjectId(user);
+    const friendObjectId = mongoose.Types.ObjectId(friend);
+
+    const removeFromArray = await User.findOneAndUpdate(
+      { _id: userObjectId },
+      { $pull: { friends: friendObjectId } }
+    );
+
+    const removeFromArray2 = await User.findOneAndUpdate(
+      { _id: friendObjectId },
+      { $pull: { friends: userObjectId } }
+    );
+
+    // deletes friendship document
+    const deleteFriendFromServer = await Friend.deleteOne({
       $or: [
         { requestBy: user, requestTo: friend },
         { requestBy: friend, requestTo: user },
