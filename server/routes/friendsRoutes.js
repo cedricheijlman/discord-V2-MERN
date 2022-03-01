@@ -6,7 +6,7 @@ const controller = require("../controllers/friendsControllers");
 
 router.post("/addFriend", controller.addFriend);
 
-router.delete("/deleteFriend", controller.removeFriend);
+router.delete("/deleteFriend", requireAuth, controller.deleteFriend);
 
 router.post("/allFriends", requireAuth, controller.allFriends);
 

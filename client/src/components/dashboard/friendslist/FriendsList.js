@@ -22,11 +22,6 @@ export const FriendsList = () => {
       });
   }, []);
 
-  const friends = [
-    { name: "cchd", online: false },
-    { name: "cchd", online: true },
-  ];
-
   return (
     <div id="friendsList">
       <h1>Friends</h1>
@@ -59,7 +54,13 @@ export const FriendsList = () => {
             <div className="allFriendsContainer">
               {allFriends.length > 0 &&
                 allFriends.map((friend, index) => {
-                  return <FriendCard key={index} username={friend.username} />;
+                  return (
+                    <FriendCard
+                      key={index}
+                      objectId={friend._id}
+                      username={friend.username}
+                    />
+                  );
                 })}
             </div>
           </>
