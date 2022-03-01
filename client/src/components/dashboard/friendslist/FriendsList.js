@@ -10,6 +10,7 @@ export const FriendsList = () => {
   useEffect(() => {
     Axios.get("http://localhost:3001/allFriends").then((result) => {
       console.log(result.data.allFriends);
+      setAllFriends(result.data.allFriends);
     });
   }, []);
 
@@ -47,9 +48,9 @@ export const FriendsList = () => {
         {friendsOption == "All" && (
           <>
             <input placeholder="Search" />
-            {friends.length > 0 &&
-              friends.map((friend, index) => {
-                return <h1 key={index}>{friend.name}</h1>;
+            {allFriends.length > 0 &&
+              allFriends.map((friend, index) => {
+                return <h1 key={index}>{friend.username}</h1>;
               })}
           </>
         )}
@@ -57,11 +58,11 @@ export const FriendsList = () => {
         {friendsOption == "Online" && (
           <>
             <input placeholder="Search" />
-            {friends.length > 0 &&
-              friends
-                .filter((f) => f.online == true)
+            {allFriends.length > 0 &&
+              allFriends
+                .filter((f) => f == false)
                 .map((friend, index) => {
-                  return <h1 key={index}>{friend.name}</h1>;
+                  return <h1 key={index}>{friend.username}</h1>;
                 })}
           </>
         )}
