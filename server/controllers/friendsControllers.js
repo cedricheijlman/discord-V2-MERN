@@ -5,7 +5,8 @@ const Friend = require("../models/friends");
 
 const allFriends = async (req, res) => {
   try {
-    User.findOne({ _id: mongoose.Types.ObjectId("621d1a7a53051771bfa07d7c") })
+    const { userId } = req.body;
+    User.findOne({ _id: mongoose.Types.ObjectId(userId) })
       .select("-password")
       .populate("friends", "-password")
       .exec((err, friends) => {

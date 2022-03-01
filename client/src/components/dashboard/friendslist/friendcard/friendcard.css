@@ -1,12 +1,19 @@
 #friendCard {
-  border-top: 1px solid rgba(255, 255, 255, 0.287);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.287);
   padding: 20px 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
-  margin: 10px 0;
+  background-color: rgb(53, 55, 59);
+  border-radius: 4px;
+  margin: 15px 0;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  transition: all 0.3s;
+}
+
+#friendCard:hover {
+  cursor: pointer;
+  background-color: rgb(78, 80, 90);
 }
 
 .friendCard__left {
@@ -24,6 +31,10 @@
 
 .friendCard__right button {
   padding: 7px;
-  border-radius: 6px;
+  border-radius: 4px;
   margin: 0 5px;
+  border: none;
+  background-color: rgb(48, 47, 56);
+  color: white;
+  cursor: pointer;
 }

@@ -74,6 +74,6 @@ All Friends
 */
 
 .allFriendsContainer {
-  border: 1px solid red;
   height: 100%;
+  padding: 10px 0;
 }

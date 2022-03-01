@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./friendslist.css";
 import Axios from "axios";
-import { FriendCard } from "./FriendCard";
+import { FriendCard } from "./friendcard/FriendCard";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
