@@ -18,9 +18,9 @@ export const AddFriendSection = () => {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: addFriendInput,
     })
-      .then((res) => {
+      .then(async (res) => {
         if (res.status === 200) {
-          setAddFriendMessage(res.data.message);
+          await setAddFriendMessage(res.data.message);
         }
 
         setTimeout(() => {
@@ -43,6 +43,11 @@ export const AddFriendSection = () => {
           placeholder="Enter a username"
           onChange={(e) => {
             handleChangeAddFriend(e);
+          }}
+          onKeyPress={(e) => {
+            if (e.code == "Enter") {
+              handleAddFriend();
+            }
           }}
         />
         <div className="knopDiv">
