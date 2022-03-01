@@ -4,16 +4,12 @@ import "./friendcard.css";
 
 export const FriendCard = ({ username, objectId }) => {
   const handleFriendDelete = () => {
-    Axios.delete(
-      "http://localhost:3001/deleteFriend",
-      {},
-      {
-        data: {
-          accessToken: localStorage.getItem("accessKey"),
-          friend: objectId,
-        },
-      }
-    ).then((result) => {
+    Axios.delete("http://localhost:3001/deleteFriend", {
+      data: {
+        accessKey: localStorage.getItem("accessKey"),
+        friend: objectId,
+      },
+    }).then((result) => {
       console.log(result);
     });
   };
