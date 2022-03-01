@@ -119,14 +119,14 @@ const addFriend = async (req, res) => {
 
       //  Check if status == 2 (friends)
       if (userStatus == 2 || friendStatus == 2) {
-        return res.status(200).json({ message: "You already are Friends" });
+        return res.status(200).json({ message: "You already are Friends!" });
       }
 
       // Check if status == 1 (pending request)
       if (userStatus == 1) {
         return res
           .status(200)
-          .json({ message: "You already sent a friend request" });
+          .json({ message: "You already sent a friend request!" });
       }
 
       // check if other user already sent friends request then* update request document to status: 2 (friends)
@@ -146,7 +146,7 @@ const addFriend = async (req, res) => {
           { $push: { friends: objectIdUser } }
         );
 
-        return res.json({ message: test });
+        return res.status.json({ message: "You are now friends" });
       }
     }
 
@@ -157,7 +157,7 @@ const addFriend = async (req, res) => {
       status: 1,
     });
 
-    return res.status(200).json({ message: newRequest });
+    return res.status(200).json({ message: "Friend Request Sent" });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: "error" });

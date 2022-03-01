@@ -3,6 +3,7 @@ import Axios from "axios";
 
 export const AddFriendSection = () => {
   const [addFriendInput, setAddFriendInput] = useState("");
+  const [addFriendMessage, setAddFriendMessage] = useState(null);
 
   const handleChangeAddFriend = (e) => {
     let value = e.target.value;
@@ -17,9 +18,19 @@ export const AddFriendSection = () => {
     Axios.post("http://localhost:3001/addFriend", {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: addFriendInput,
-    }).then((res) => {
-      console.log(res);
-    });
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          setAddFriendMessage(res.data.message);
+        }
+
+        setTimeout(() => {
+          setAddFriendMessage("");
+        }, 1300);
+      })
+      .catch((err) => {
+        console.log("err", err.message);
+      });
   };
 
   return (
@@ -39,6 +50,7 @@ export const AddFriendSection = () => {
           <button onClick={handleAddFriend}>Send Friend Request</button>
         </div>
       </div>
+      <p>{addFriendMessage}</p>
     </>
   );
 };
