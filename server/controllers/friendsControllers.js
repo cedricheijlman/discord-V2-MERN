@@ -23,7 +23,23 @@ const allFriends = async (req, res) => {
 
 const removeFriend = async (req, res) => {
   try {
-    return res.status(200).json({ message: "worked" });
+    const { user, friend } = req.body;
+
+    //const userId = mongoose.Types.ObjectId(user);
+    //const friendid = mongoose.Types.ObjectId(friend);
+
+    const findFriend = await Friend.find({
+      $or: [
+        { requestBy: user, requestTo: friend },
+        { requestBy: friend, requestTo: user },
+      ],
+    });
+
+    if (!findFriend) {
+      return res.status(404).json({ message: "no friendship" });
+    }
+
+    return res.status(200).json({ message: findFriend });
   } catch (error) {
     return res.status(400).json({ message: "error" });
   }
