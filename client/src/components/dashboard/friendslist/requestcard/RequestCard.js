@@ -9,7 +9,6 @@ export const RequestCard = ({ request, setChange, change }) => {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: request.username,
     }).then((res) => {
-      console.log(res);
       setChange(change + 1);
     });
   };

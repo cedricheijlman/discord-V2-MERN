@@ -11,7 +11,6 @@ export const FriendsRequestsSection = () => {
     Axios.post("http://localhost:3001/allFriendRequests", {
       accessKey: localStorage.getItem("accessKey"),
     }).then((res) => {
-      console.log(res);
       setAllFriendRequests(res.data.allRequests);
     });
   }, [change]);

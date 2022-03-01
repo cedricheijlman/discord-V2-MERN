@@ -4,26 +4,12 @@ import Axios from "axios";
 import { FriendCard } from "./friendcard/FriendCard";
 import { AddFriendSection } from "./AddFriendSection";
 import { FriendsRequestsSection } from "./FriendsRequestsSection";
+import { AllFriendsSection } from "./AllFriendsSection";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
-  const [allFriends, setAllFriends] = useState([]);
-  const [allFriendRequests, setAllFriendsRequests] = useState([]);
 
-  // Fetch Friends
-  useEffect(() => {
-    Axios.post("http://localhost:3001/allFriends", {
-      accessKey: localStorage.getItem("accessKey"),
-    })
-      .then((result) => {
-        setAllFriends(result.data.allFriends);
-        console.log(result);
-      })
-      .catch((err) => {
-        localStorage.removeItem("accessToken");
-        window.location.pathname("/login");
-      });
-  }, []);
+  const [allFriendRequests, setAllFriendsRequests] = useState([]);
 
   return (
     <div id="friendsList">
@@ -59,29 +45,13 @@ export const FriendsList = () => {
       </div>
 
       <div className="friends__containerBottom">
-        {friendsOption == "All" && (
-          <>
-            <input placeholder="Search" />
-            <div className="allFriendsContainer">
-              {allFriends.length > 0 &&
-                allFriends.map((friend, index) => {
-                  return (
-                    <FriendCard
-                      key={index}
-                      objectId={friend._id}
-                      username={friend.username}
-                    />
-                  );
-                })}
-            </div>
-          </>
-        )}
+        {friendsOption == "All" && <AllFriendsSection />}
 
         {friendsOption == "Online" && (
           <>
             <input placeholder="Search" />
-            {allFriends.length > 0 &&
-              allFriends
+            {[].length > 0 &&
+              []
                 .filter((f) => f == false)
                 .map((friend, index) => {
                   return <h1 key={index}>{friend.username}</h1>;
