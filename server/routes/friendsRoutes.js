@@ -4,7 +4,7 @@ const { requireAuth } = require("../middleware/authMiddleware");
 
 const controller = require("../controllers/friendsControllers");
 
-router.post("/addFriend", controller.addFriend);
+router.post("/addFriend", requireAuth, controller.addFriend);
 
 router.delete("/deleteFriend", requireAuth, controller.deleteFriend);
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./friendslist.css";
 import Axios from "axios";
 import { FriendCard } from "./friendcard/FriendCard";
-import { AddFriendSection } from "./addfriend/AddFriendSection";
+import { AddFriendSection } from "./AddFriendSection";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");

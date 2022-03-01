@@ -76,11 +76,21 @@ const deleteFriend = async (req, res) => {
 
 const addFriend = async (req, res) => {
   try {
-    const { user, friend } = req.body;
+    const { accessKey, friendUsername } = req.body;
+
+    const decodedJwt = jwt.decode(accessKey);
+
+    const findUsername = await User.findOne({
+      username: friendUsername,
+    }).select("-password");
+
+    if (!findUsername) {
+      return res.status(200).json({ message: "Name doesn't exist" });
+    }
 
     // create object ids
-    const objectIdUser = mongoose.Types.ObjectId(user);
-    const objectIdFriend = mongoose.Types.ObjectId(friend);
+    const objectIdUser = mongoose.Types.ObjectId(decodedJwt.id);
+    const objectIdFriend = mongoose.Types.ObjectId(findUsername._id);
 
     // check if user already sent a friend request
     const userRequestExists = await Friend.find({
@@ -142,8 +152,8 @@ const addFriend = async (req, res) => {
 
     // if no pending friend request and not already friends - Create NEW pending friend request
     const newRequest = await Friend.create({
-      requestBy: mongoose.Types.ObjectId(user),
-      requestTo: mongoose.Types.ObjectId(friend),
+      requestBy: objectIdUser,
+      requestTo: objectIdFriend,
       status: 1,
     });
 

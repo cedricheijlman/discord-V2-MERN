@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Axios from "axios";
 
 export const AddFriendSection = () => {
   const [addFriendInput, setAddFriendInput] = useState("");
@@ -13,6 +14,12 @@ export const AddFriendSection = () => {
 
   const handleAddFriend = () => {
     console.log(addFriendInput);
+    Axios.post("http://localhost:3001/addFriend", {
+      accessKey: localStorage.getItem("accessKey"),
+      friendUsername: addFriendInput,
+    }).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
