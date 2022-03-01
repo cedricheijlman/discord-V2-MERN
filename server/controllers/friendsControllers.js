@@ -3,6 +3,7 @@ const { ObjectId } = require("mongoose");
 const User = require("../models/users");
 const Friend = require("../models/friends");
 const jwt = require("jsonwebtoken");
+const { findByIdAndDelete } = require("../models/users");
 
 const allFriends = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ const removeFriend = async (req, res) => {
     //const userId = mongoose.Types.ObjectId(user);
     //const friendid = mongoose.Types.ObjectId(friend);
 
-    const findFriend = await Friend.find({
+    const findFriend = await Friend.findOne({
       $or: [
         { requestBy: user, requestTo: friend },
         { requestBy: friend, requestTo: user },
@@ -39,9 +40,20 @@ const removeFriend = async (req, res) => {
       return res.status(404).json({ message: "no friendship" });
     }
 
-    return res.status(200).json({ message: findFriend });
+    if (findFriend.status == 1) {
+      return res.status(404).json({ message: "You are not friends" });
+    }
+
+    const deleteOn = await Friend.deleteOne({
+      $or: [
+        { requestBy: user, requestTo: friend },
+        { requestBy: friend, requestTo: user },
+      ],
+    });
+
+    return res.status(200).json({ message: "deleted" });
   } catch (error) {
-    return res.status(400).json({ message: "error" });
+    return res.status(400).json({ message: error });
   }
 };
 
