@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./friendslist.css";
 import Axios from "axios";
+import { FriendCard } from "./FriendCard";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
@@ -48,10 +49,12 @@ export const FriendsList = () => {
         {friendsOption == "All" && (
           <>
             <input placeholder="Search" />
-            {allFriends.length > 0 &&
-              allFriends.map((friend, index) => {
-                return <h1 key={index}>{friend.username}</h1>;
-              })}
+            <div className="allFriendsContainer">
+              {allFriends.length > 0 &&
+                allFriends.map((friend, index) => {
+                  return <FriendCard key={index} username={friend.username} />;
+                })}
+            </div>
           </>
         )}
 

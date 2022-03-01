@@ -68,3 +68,12 @@
   height: 50px;
   font-size: 16px;
 }
+
+/*
+All Friends
+*/
+
+.allFriendsContainer {
+  border: 1px solid red;
+  height: 100%;
+}
