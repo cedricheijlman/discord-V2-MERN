@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./friendslist.css";
 import Axios from "axios";
 import { FriendCard } from "./friendcard/FriendCard";
+import { AddFriendSection } from "./addfriend/AddFriendSection";
 
 export const FriendsList = () => {
   const [friendsOption, setFriendsOption] = useState("All");
@@ -78,13 +79,7 @@ export const FriendsList = () => {
           </>
         )}
 
-        {friendsOption == "AddFriend" && (
-          <>
-            <h3 style={{ marginTop: 10 }}>Add A Friend</h3>
-            <p>You can add a friend with their username.</p>
-            <input className="addFriendSearch" placeholder="Enter a username" />
-          </>
-        )}
+        {friendsOption == "AddFriend" && <AddFriendSection />}
       </div>
     </div>
   );

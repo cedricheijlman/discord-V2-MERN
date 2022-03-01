@@ -77,3 +77,49 @@ All Friends
   height: 100%;
   padding: 10px 0;
 }
+
+/*
+Add friends 
+*/
+
+.addFriendInput {
+  display: flex;
+
+  width: 90%;
+  position: relative;
+  margin-top: 15px;
+}
+
+.addFriendInput input {
+  width: 100% !important;
+  margin-top: 0;
+  z-index: 99;
+}
+
+.knopDiv {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.addFriendInput button {
+  align-items: center;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(67, 158, 87);
+  color: white;
+  padding: 8px 10px;
+  margin-right: 20px;
+  z-index: 999;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.addFriendInput button:hover {
+  transform: scale(1.02);
+}

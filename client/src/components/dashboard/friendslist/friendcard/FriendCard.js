@@ -11,6 +11,7 @@ export const FriendCard = ({ username, objectId }) => {
       },
     }).then((result) => {
       console.log(result);
+      window.location.reload();
     });
   };
 
