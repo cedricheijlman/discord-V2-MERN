@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const { ObjectId } = require("mongoose");
 const User = require("../models/users");
 const Friend = require("../models/friends");
+const jwt = require("jsonwebtoken");
 
 const allFriends = async (req, res) => {
   try {
-    const { userId } = req.body;
-    User.findOne({ _id: mongoose.Types.ObjectId(userId) })
+    const { accessKey } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+
+    User.findOne({ _id: mongoose.Types.ObjectId(decodedJwt.id) })
       .select("-password")
       .populate("friends", "-password")
       .exec((err, friends) => {

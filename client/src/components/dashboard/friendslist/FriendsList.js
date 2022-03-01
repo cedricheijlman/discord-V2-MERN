@@ -9,7 +9,9 @@ export const FriendsList = () => {
 
   // Fetch Friends
   useEffect(() => {
-    Axios.get("http://localhost:3001/allFriends").then((result) => {
+    Axios.post("http://localhost:3001/allFriends", {
+      accessKey: localStorage.getItem("accessKey"),
+    }).then((result) => {
       console.log(result.data.allFriends);
       setAllFriends(result.data.allFriends);
     });

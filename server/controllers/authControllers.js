@@ -10,9 +10,13 @@ const postLogin = async (req, res) => {
     const findUser = await User.findOne({ email });
 
     if (findUser && (await bcrypt.compare(password, findUser.password))) {
-      const accessToken = sign({ email }, process.env.SECRET_CODE, {
-        expiresIn: "1h",
-      });
+      const accessToken = sign(
+        { email, id: findUser._id },
+        process.env.SECRET_CODE,
+        {
+          expiresIn: "1h",
+        }
+      );
 
       return res.status(200).json({ accessToken, id: findUser._id });
     }
@@ -60,9 +64,13 @@ const postRegister = async (req, res) => {
       password: encryptedPassword,
     });
 
-    const accessToken = sign({ email }, process.env.SECRET_CODE, {
-      expiresIn: "1h",
-    });
+    const accessToken = sign(
+      { email, id: newUser._id },
+      process.env.SECRET_CODE,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     return res.status(201).json({
       userDetails: {
