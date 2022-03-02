@@ -1,0 +1,71 @@
+#privateMessage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#privateMessage__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(49, 50, 53);
+  padding: 20px 20px;
+  color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.privateMessage__headerLeft {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.privateMessage__headerRight {
+  margin-right: 10px;
+}
+
+.privateMessage__headerRight input {
+  padding: 8px;
+  background-color: rgb(224, 224, 224);
+  border: none;
+  border-radius: 5px;
+}
+
+/*
+Private Message Box 
+*/
+
+.privateMessage__box {
+  height: 100%;
+}
+
+/*
+Private Message Send 
+*/
+
+.privateMessage__sendMessage {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 0 20px;
+  height: 90px;
+}
+
+.privateMessage__sendMessage input {
+  height: 40px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(64, 65, 71);
+  margin-bottom: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  padding: 10px;
+  outline: none;
+  color: white;
+}
+
+.privateMessage__sendMessage input::placeholder {
+  color: gray;
+}
