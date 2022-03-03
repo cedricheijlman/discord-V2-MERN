@@ -7,11 +7,12 @@ export const PrivateMessage = () => {
   const [messageInput, setMessageInput] = React.useState("");
   const [messages, setMessages] = React.useState([]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     console.log(messageInput);
 
     if (messageInput !== "" && messageInput !== null) {
-      setMessages([...messages, { message: messageInput }]);
+      await setMessages([...messages, { message: messageInput }]);
+      setMessageInput("");
     }
   };
 
@@ -25,8 +26,8 @@ export const PrivateMessage = () => {
         </div>
       </div>
       <ScrollToBottom className="privateMessage__box">
-        {messages.map((message) => {
-          return <Message messageValue={message.message} />;
+        {messages.map((message, index) => {
+          return <Message key={index} messageValue={message.message} />;
         })}
       </ScrollToBottom>
       <div className="privateMessage__sendMessage">
@@ -36,8 +37,8 @@ export const PrivateMessage = () => {
               handleSendMessage();
             }
           }}
+          value={messageInput}
           onChange={(e) => {
-            console.log(e.target.value);
             setMessageInput(e.target.value);
           }}
           placeholder="Send Message"
