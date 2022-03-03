@@ -1,7 +1,7 @@
 import React from "react";
 import "./message.css";
 
-export const Message = () => {
+export const Message = ({ messageValue }) => {
   return (
     <div id="messageOne">
       <div className="imageContainer">
@@ -9,9 +9,7 @@ export const Message = () => {
       </div>
       <div className="messageOne__message">
         <h3>Username</h3>
-        <p>
-          wfkwfkwofkwofkwofwfkwfkwofkwofkwofwfkwfkwofkwofkwofwfkwfkwofkwwfkwfkwofkwofkwofwfkwfkwofkwofkwofwfkwfkwofkwofkwofwfkwfkwofkwofkwofwfkwfkwofkwofkwofwfkwfkwofkwofkwofofkwofwfkwfkwofkwofkwofwfkwfkwofkwofkwof
-        </p>
+        <p>{messageValue}</p>
       </div>
     </div>
   );

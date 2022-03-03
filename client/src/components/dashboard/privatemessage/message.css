@@ -11,7 +11,7 @@
 }
 
 #messageOne:hover {
-  background-color: rgb(65, 64, 64);
+  background-color: rgb(43, 43, 43);
 }
 
 #messageOne img {
@@ -20,6 +20,7 @@
   width: 45px;
   border-radius: 50%;
   object-fit: contain;
+  cursor: pointer;
 }
 
 .messageOne__message {
