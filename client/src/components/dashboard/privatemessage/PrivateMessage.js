@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Message } from "./Message";
 import "./privatemessage.css";
 import ScrollToBottom from "react-scroll-to-bottom";
+import Axios from "axios";
+import { useParams } from "react-router-dom";
 
 export const PrivateMessage = () => {
   const [messageInput, setMessageInput] = React.useState("");
@@ -15,8 +17,14 @@ export const PrivateMessage = () => {
       setMessageInput("");
     }
   };
-
-  useEffect(() => {}, []);
+  let { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    //Axios.post("http://localhost:3001/privateMessage", {
+    //  accessKey: localStorage.getItem("accessKey"),
+    // friend: params.
+    // });
+  }, []);
   return (
     <div id="privateMessage">
       <div id="privateMessage__header">

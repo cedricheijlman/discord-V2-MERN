@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const { ObjectId } = require("mongoose");
 const User = require("../models/users");
 const Friend = require("../models/friends");
+const PrivateMessage = require("../models/privatemessage");
 const jwt = require("jsonwebtoken");
+const { find } = require("../models/privatemessage");
 
 const allFriends = async (req, res) => {
   try {
@@ -22,7 +24,29 @@ const allFriends = async (req, res) => {
 };
 
 const privateMessage = async (req, res) => {
-  res.status(200).json({ message: "route" });
+  try {
+    const { accessKey, friend } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+    console.log(decodedJwt.id, "fwkofow");
+    const userId = decodedJwt.id;
+
+    if (String(friend).length > 24) {
+      return res.status(200).json({ message: "too long" });
+    }
+
+    const checkIfUserExists = await User.findOne({
+      _id: mongoose.Types.ObjectId(friend),
+    });
+
+    if (!checkIfUserExists) {
+      return res.status(200).json({ message: "wrong" });
+    }
+
+    res.status(200).json({ message: hello });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({ message: "dkowfkwo" });
+  }
 };
 
 const allFriendRequests = async (req, res) => {
