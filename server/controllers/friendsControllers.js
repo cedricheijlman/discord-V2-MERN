@@ -42,10 +42,28 @@ const privateMessage = async (req, res) => {
       return res.status(200).json({ message: "wrong" });
     }
 
-    res.status(200).json({ message: hello });
+    const check = await PrivateMessage.findOne({
+      members: { $all: [userId, friend] },
+    });
+
+    if (check) {
+      return res.status(200).json({
+        friendId: checkIfUserExists._id,
+        username: checkIfUserExists.username,
+        messages: check.messages,
+      });
+    } else {
+      const created = await PrivateMessage.create({
+        members: [userId, friend],
+      });
+    }
+
+    console.log("created", created);
+
+    return res.status(200).json({ message: "worked" });
   } catch (error) {
     console.log(error);
-    res.status(200).json({ message: "dkowfkwo" });
+    return res.status(200).json({ message: "dkowfkwo" });
   }
 };
 
