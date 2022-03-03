@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Message } from "./Message";
 import "./privatemessage.css";
 
 export const PrivateMessage = () => {
@@ -11,7 +12,10 @@ export const PrivateMessage = () => {
           <input placeholder="Search Message" />
         </div>
       </div>
-      <div className="privateMessage__box">Messages</div>
+      <div className="privateMessage__box">
+        <Message />
+        <Message />
+      </div>
       <div className="privateMessage__sendMessage">
         <input placeholder="Send Message" />
       </div>

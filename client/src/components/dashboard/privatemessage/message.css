@@ -1,0 +1,41 @@
+#messageOne {
+  color: white;
+  padding: 15px 0;
+  display: flex;
+}
+
+#messageOne .imageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#messageOne:hover {
+  background-color: rgb(65, 64, 64);
+}
+
+#messageOne img {
+  margin: 0 25px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.messageOne__message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageOne__message p {
+  word-break: break-all;
+  padding-right: 100px;
+  width: 100%;
+  font-size: 15px;
+  margin-top: 3px;
+}
+
+.messageOne__message h3 {
+  font-size: 17px;
+}
