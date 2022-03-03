@@ -10,6 +10,8 @@ router.post("/allFriendRequests", requireAuth, controller.allFriendRequests);
 
 router.delete("/deleteFriend", requireAuth, controller.deleteFriend);
 
+router.post("/privateMessage", controller.privateMessage);
+
 router.post("/allFriends", requireAuth, controller.allFriends);
 
 module.exports = router;

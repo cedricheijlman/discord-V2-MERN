@@ -21,6 +21,10 @@ const allFriends = async (req, res) => {
   }
 };
 
+const privateMessage = async (req, res) => {
+  res.status(200).json({ message: "route" });
+};
+
 const allFriendRequests = async (req, res) => {
   try {
     const { accessKey } = req.body;
@@ -187,4 +191,5 @@ module.exports = {
   deleteFriend,
   allFriends,
   allFriendRequests,
+  privateMessage,
 };
