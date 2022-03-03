@@ -15,6 +15,12 @@ export const PrivateMessage = () => {
       <div className="privateMessage__box">
         <Message />
         <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
       </div>
       <div className="privateMessage__sendMessage">
         <input placeholder="Send Message" />
