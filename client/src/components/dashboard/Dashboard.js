@@ -23,19 +23,18 @@ function Dashboard({ setServerModal }) {
         if (!result.status == 200) {
           window.location.pathname = "/login";
         } else {
-          socket.emit("send-email", "test");
+          console.log(result.data.payload);
+          socket.emit(
+            "loggedIn",
+            result.data.payload.email,
+            result.data.payload.id
+          );
         }
       })
       .catch(() => {
         window.location.pathname = "/login";
       });
   }, []);
-
-  useEffect(() => {
-    socket.on("recievedNewUser", () => {
-      console.log("new User");
-    });
-  }, [socket]);
 
   const items = [{ name: "home0" }, { name: "home1" }, { name: "home2" }];
 

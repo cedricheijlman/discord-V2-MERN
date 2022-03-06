@@ -48,6 +48,7 @@ const privateMessage = async (req, res) => {
 
     if (check) {
       return res.status(200).json({
+        privateMessageId: check._id,
         friendId: checkIfUserExists._id,
         username: checkIfUserExists.username,
         messages: check.messages,
