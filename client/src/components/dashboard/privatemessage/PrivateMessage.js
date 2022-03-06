@@ -21,9 +21,12 @@ export const PrivateMessage = () => {
 
     if (messageInput !== "" && messageInput !== null) {
       await setMessages([...messages, { message: messageInput }]);
+      await socket.emit("send_message", messageInput);
       setMessageInput("");
     }
   };
+
+  useEffect(() => {}, []);
 
   // get id from url
   let { id } = useParams();
@@ -36,6 +39,7 @@ export const PrivateMessage = () => {
     }).then((res) => {
       setFriendInfo(res.data);
       setMessages(res.data.messages);
+      socket.emit("join_privateMessage", res.data.privateMessageId);
     });
   }, []);
 

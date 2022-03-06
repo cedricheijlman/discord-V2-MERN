@@ -33,6 +33,15 @@ io.on("connection", (socket) => {
     console.log(onlineUsers);
   });
 
+  socket.on("join_privateMessage", (privateMessageId) => {
+    socket.join(privateMessageId);
+    console.log(privateMessageId);
+  });
+
+  socket.on("send_message", (messageInput) => {
+    console.log(messageInput);
+  });
+
   socket.on("disconnect", () => {
     console.log("user discconected");
     onlineUsers = onlineUsers.filter((id) => id !== socket.userId);
