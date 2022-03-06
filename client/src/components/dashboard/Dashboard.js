@@ -4,7 +4,6 @@ import { useParams, Outlet, useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import HomeIcon from "@mui/icons-material/Home";
 import { GroupItem } from "./GroupItem";
-
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
@@ -87,7 +86,7 @@ function Dashboard({ setServerModal }) {
         )}
       </div>
       <div className="rightDashboard">
-        <Outlet />
+        <Outlet context={{ socket }} />
       </div>
     </div>
   );

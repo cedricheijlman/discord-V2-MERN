@@ -23,6 +23,7 @@ const allFriends = async (req, res) => {
   }
 };
 
+// private Message Create
 const privateMessage = async (req, res) => {
   try {
     const { accessKey, friend } = req.body;
@@ -58,8 +59,6 @@ const privateMessage = async (req, res) => {
         members: [userId, friend],
       });
     }
-
-    console.log("created", created);
 
     return res.status(200).json({ message: "worked" });
   } catch (error) {

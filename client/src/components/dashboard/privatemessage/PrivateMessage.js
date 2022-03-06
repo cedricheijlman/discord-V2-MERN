@@ -4,12 +4,18 @@ import "./privatemessage.css";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 export const PrivateMessage = () => {
+  // Get Socket Instance from dashboard
+  const { socket } = useOutletContext();
+
+  // Message Input, Messages, Friend Info Account
   const [messageInput, setMessageInput] = React.useState("");
   const [messages, setMessages] = React.useState([]);
   const [friendInfo, setFriendInfo] = React.useState({});
 
+  // Handle When Message Is sent
   const handleSendMessage = async () => {
     console.log(messageInput);
 
@@ -18,18 +24,21 @@ export const PrivateMessage = () => {
       setMessageInput("");
     }
   };
+
+  // get id from url
   let { id } = useParams();
 
+  // Post Request Private Message
   useEffect(() => {
     Axios.post("http://localhost:3001/privateMessage", {
       accessKey: localStorage.getItem("accessKey"),
       friend: id,
     }).then((res) => {
-      console.log(res.data);
       setFriendInfo(res.data);
       setMessages(res.data.messages);
     });
   }, []);
+
   return (
     <div id="privateMessage">
       <div id="privateMessage__header">
