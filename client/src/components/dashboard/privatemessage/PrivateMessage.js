@@ -21,12 +21,20 @@ export const PrivateMessage = () => {
 
     if (messageInput !== "" && messageInput !== null) {
       await setMessages([...messages, { message: messageInput }]);
-      await socket.emit("send_message", messageInput);
+      await socket.emit(
+        "send_message",
+        friendInfo.privateMessageId,
+        messageInput
+      );
       setMessageInput("");
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    socket.on("recieveSent", (messageInput) => {
+      console.log(messageInput);
+    });
+  }, [socket]);
 
   // get id from url
   let { id } = useParams();
