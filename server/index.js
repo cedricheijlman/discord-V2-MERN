@@ -23,11 +23,20 @@ const io = new Server(server, {
   cors: { origin: "http://localhost:3000" },
 });
 
+let users = [];
+
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  socket.on("send-email", function (email) {
+    socket.email = email;
+    users.push(socket.email);
+    console.log(users, "test");
+    socket.emit("recievedNewUser");
+  });
 
   socket.on("disconnect", () => {
     console.log("user discconected");
+    users = users.filter((item) => item !== "test");
+    console.log(users);
   });
 });
 

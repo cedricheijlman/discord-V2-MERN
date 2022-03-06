@@ -5,6 +5,9 @@ import "./dashboard.css";
 import HomeIcon from "@mui/icons-material/Home";
 import { GroupItem } from "./GroupItem";
 
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3001");
+
 function Dashboard({ setServerModal }) {
   const [selectedGroup, setSelectedGroup] = useState("home");
 
@@ -19,12 +22,20 @@ function Dashboard({ setServerModal }) {
       .then((result) => {
         if (!result.status == 200) {
           window.location.pathname = "/login";
+        } else {
+          socket.emit("send-email", "test");
         }
       })
       .catch(() => {
         window.location.pathname = "/login";
       });
   }, []);
+
+  useEffect(() => {
+    socket.on("recievedNewUser", () => {
+      console.log("new User");
+    });
+  }, [socket]);
 
   const items = [{ name: "home0" }, { name: "home1" }, { name: "home2" }];
 

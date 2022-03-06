@@ -4,14 +4,12 @@ import "./App.css";
 import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
-import io from "socket.io-client";
+
 import { FriendsList } from "./components/dashboard/friendslist/FriendsList";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { Switch } from "@mui/material";
 import { PrivateMessage } from "./components/dashboard/privatemessage/PrivateMessage";
-
-const socket = io.connect("http://localhost:3001");
 
 function App() {
   const customStylesModal = {
