@@ -65,7 +65,13 @@ export const PrivateMessage = () => {
       </div>
       <ScrollToBottom className="privateMessage__box">
         {messages.map((message, index) => {
-          return <Message key={index} messageValue={message.message} />;
+          return (
+            <Message
+              key={index}
+              username={message.sentBy.username}
+              messageValue={message.message}
+            />
+          );
         })}
       </ScrollToBottom>
       <div className="privateMessage__sendMessage">
