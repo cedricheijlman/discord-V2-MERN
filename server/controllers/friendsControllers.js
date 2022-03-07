@@ -45,9 +45,13 @@ const privateMessage = async (req, res) => {
 
     const check = await PrivateMessage.findOne({
       members: { $all: [userId, friend] },
+    }).populate({
+      path: "messages.sentBy",
+      select: "username",
     });
 
     if (check) {
+      console.log(check);
       return res.status(200).json({
         privateMessageId: check._id,
         friendId: checkIfUserExists._id,

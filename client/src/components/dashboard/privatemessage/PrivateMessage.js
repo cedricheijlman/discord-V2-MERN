@@ -48,6 +48,7 @@ export const PrivateMessage = () => {
       accessKey: localStorage.getItem("accessKey"),
       friend: id,
     }).then((res) => {
+      console.log(res.data.messages);
       setFriendInfo(res.data);
       setMessages(res.data.messages);
       socket.emit("join_privateMessage", res.data.privateMessageId);
