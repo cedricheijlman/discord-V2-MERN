@@ -30,9 +30,10 @@ export const PrivateMessage = () => {
     }
   };
 
-  useEffect(() => {
-    socket.on("recieveSent", (messageInput) => {
+  useEffect(async () => {
+    await socket.on("message_recieved", (messageInput) => {
       console.log(messageInput);
+      setMessages([...messages, { message: messageInput }]);
     });
   }, [socket]);
 

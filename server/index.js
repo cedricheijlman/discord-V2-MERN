@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (privateMessageId, messageInput) => {
     console.log(messageInput);
-    socket.to(privateMessageId).emit("recieveSent", messageInput);
+    socket.to(privateMessageId).emit("message_recieved", messageInput);
   });
 
   socket.on("disconnect", () => {
