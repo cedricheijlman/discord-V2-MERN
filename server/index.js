@@ -11,6 +11,8 @@ const app = express();
 const authRoutes = require("./routes/authRoutes");
 const friendsRoutes = require("./routes/friendsRoutes");
 
+const PrivateMessage = require("./models/privatemessage");
+
 app.use(cors());
 app.use(express.json());
 
@@ -38,9 +40,17 @@ io.on("connection", (socket) => {
     console.log(privateMessageId);
   });
 
-  socket.on("send_message", (privateMessageId, messageInput) => {
-    console.log(messageInput);
-    socket.to(privateMessageId).emit("message_recieved", messageInput);
+  socket.on("send_message", async (privateMessageId, messageInput) => {
+    if (messageInput.message !== "") {
+      console.log(messageInput, privateMessageId);
+      const test = await PrivateMessage.findOneAndUpdate(
+        { _id: privateMessageId },
+        { $push: { messages: messageInput } }
+      );
+
+      console.log(test);
+      socket.to(privateMessageId).emit("message_recieved", messageInput);
+    }
   });
 
   socket.on("disconnect", () => {

@@ -20,11 +20,9 @@ export const PrivateMessage = () => {
     console.log(messageInput);
 
     if (messageInput !== "" && messageInput !== null) {
-      await socket.emit(
-        "send_message",
-        friendInfo.privateMessageId,
-        messageInput
-      );
+      await socket.emit("send_message", friendInfo.privateMessageId, {
+        message: messageInput,
+      });
       setMessages((list) => [...list, { message: messageInput }]);
       setMessageInput("");
     }
@@ -33,7 +31,7 @@ export const PrivateMessage = () => {
   useEffect(async () => {
     await socket.on("message_recieved", (messageInput) => {
       console.log(messageInput);
-      setMessages((list) => [...list, { message: messageInput }]);
+      setMessages((list) => [...list, messageInput]);
     });
   }, [socket]);
 

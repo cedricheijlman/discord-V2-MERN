@@ -11,7 +11,7 @@ const postLogin = async (req, res) => {
 
     if (findUser && (await bcrypt.compare(password, findUser.password))) {
       const accessToken = sign(
-        { email, id: findUser._id },
+        { email, id: findUser._id, username: findUser.username },
         process.env.SECRET_CODE,
         {
           expiresIn: "1h",
@@ -65,7 +65,7 @@ const postRegister = async (req, res) => {
     });
 
     const accessToken = sign(
-      { email, id: newUser._id },
+      { email, id: newUser._id, username },
       process.env.SECRET_CODE,
       {
         expiresIn: "1h",
