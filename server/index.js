@@ -32,12 +32,10 @@ io.on("connection", (socket) => {
     socket.username = username;
     socket.userId = userId;
     onlineUsers.push(userId);
-    console.log(onlineUsers);
   });
 
   socket.on("join_privateMessage", (privateMessageId) => {
     socket.join(privateMessageId);
-    console.log(privateMessageId);
   });
 
   socket.on("send_message", async (privateMessageId, messageInput) => {
@@ -45,10 +43,16 @@ io.on("connection", (socket) => {
       console.log(messageInput, privateMessageId);
       const test = await PrivateMessage.findOneAndUpdate(
         { _id: privateMessageId },
-        { $push: { messages: messageInput } }
+        {
+          $push: {
+            messages: {
+              message: messageInput.message,
+              sentBy: socket.userId,
+            },
+          },
+        }
       );
-
-      console.log(test);
+      console.log("test", test);
       socket.to(privateMessageId).emit("message_recieved", messageInput);
     }
   });

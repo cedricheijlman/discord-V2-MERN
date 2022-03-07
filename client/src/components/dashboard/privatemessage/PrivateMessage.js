@@ -8,7 +8,7 @@ import { useOutletContext } from "react-router-dom";
 
 export const PrivateMessage = () => {
   // Get Socket Instance from dashboard
-  const { socket } = useOutletContext();
+  const { socket, username } = useOutletContext();
 
   // Message Input, Messages, Friend Info Account
   const [messageInput, setMessageInput] = React.useState("");
@@ -22,8 +22,12 @@ export const PrivateMessage = () => {
     if (messageInput !== "" && messageInput !== null) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,
+        sentBy: username,
       });
-      setMessages((list) => [...list, { message: messageInput }]);
+      setMessages((list) => [
+        ...list,
+        { message: messageInput, username: username },
+      ]);
       setMessageInput("");
     }
   };

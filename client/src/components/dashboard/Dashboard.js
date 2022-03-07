@@ -9,6 +9,7 @@ const socket = io.connect("http://localhost:3001");
 
 function Dashboard({ setServerModal }) {
   const [selectedGroup, setSelectedGroup] = useState("home");
+  const [username, setUsername] = useState("");
 
   // to check if it equals the home page  /me/
   const pathName = window.location.pathname.slice(1, 3);
@@ -18,12 +19,13 @@ function Dashboard({ setServerModal }) {
     Axios.post("http://localhost:3001/validateUser", {
       accessTokenKey: localStorage.getItem("accessKey"),
     })
-      .then((result) => {
+      .then(async (result) => {
         if (!result.status == 200) {
           window.location.pathname = "/login";
         } else {
           console.log(result.data.payload);
-          socket.emit(
+          setUsername(result.data.payload.username);
+          await socket.emit(
             "loggedIn",
             result.data.payload.username,
             result.data.payload.id
@@ -86,7 +88,7 @@ function Dashboard({ setServerModal }) {
         )}
       </div>
       <div className="rightDashboard">
-        <Outlet context={{ socket }} />
+        <Outlet context={{ socket, username }} />
       </div>
     </div>
   );
