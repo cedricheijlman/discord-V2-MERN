@@ -71,6 +71,11 @@ function Login() {
           <span>Password</span>
           <input
             type="password"
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                handleLogin();
+              }
+            }}
             onChange={(e) => {
               if (e.target.value !== "") {
                 setPassword(e.target.value);
