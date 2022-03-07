@@ -25,7 +25,7 @@ function Dashboard({ setServerModal }) {
           console.log(result.data.payload);
           socket.emit(
             "loggedIn",
-            result.data.payload.email,
+            result.data.payload.username,
             result.data.payload.id
           );
         }

@@ -28,8 +28,8 @@ const io = new Server(server, {
 let onlineUsers = [];
 
 io.on("connection", (socket) => {
-  socket.on("loggedIn", (email, userId) => {
-    socket.email = email;
+  socket.on("loggedIn", (username, userId) => {
+    socket.username = username;
     socket.userId = userId;
     onlineUsers.push(userId);
     console.log(onlineUsers);
