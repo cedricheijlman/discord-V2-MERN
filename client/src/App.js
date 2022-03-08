@@ -16,12 +16,16 @@ import Axios from "axios";
 function App() {
   // Create Server Handle
   const handleCreateServer = () => {
-    Axios.post("http://localhost:3001/createServer", {
-      accessKey: localStorage.getItem("accessKey"),
-      serverName: serverNameInput,
-    }).then((res) => {
-      console.log(res);
-    });
+    if ((toggled && serverPasswordInput !== "") || !toggled) {
+      Axios.post("http://localhost:3001/createServer", {
+        accessKey: localStorage.getItem("accessKey"),
+        serverName: serverNameInput,
+        private: toggled ? true : false,
+        password: toggled ? serverPasswordInput : "",
+      }).then((res) => {
+        console.log(res);
+      });
+    }
   };
 
   // Create Server Modal Styles
@@ -94,7 +98,9 @@ function App() {
                 <h5>Private?</h5>
                 <Switch
                   checked={toggled}
-                  onChange={(e) => setToggled(e.target.checked)}
+                  onChange={(e) => {
+                    setToggled(e.target.checked);
+                  }}
                 />
               </div>
               <input

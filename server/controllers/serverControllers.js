@@ -4,7 +4,7 @@ const Server = require("../models/servers");
 
 const createServer = async (req, res) => {
   try {
-    const { accessKey, serverName } = req.body;
+    const { accessKey, serverName, private, password } = req.body;
     const decodedJwt = jwt.decode(accessKey);
 
     const serverExists = await Server.findOne({ serverName });
@@ -15,8 +15,9 @@ const createServer = async (req, res) => {
 
     const newServer = await Server.create({
       serverName: serverName,
-      private: false,
+      private: private,
       owner: decodedJwt.id,
+      password: password,
       members: [{ userId: decodedJwt.id, role: "Admin" }],
     });
 
