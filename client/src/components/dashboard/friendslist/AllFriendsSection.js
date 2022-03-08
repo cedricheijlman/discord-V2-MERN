@@ -13,7 +13,7 @@ export const AllFriendsSection = () => {
       })
       .catch((err) => {
         localStorage.removeItem("accessToken");
-        window.location.pathname("/login");
+        window.location.pathname = "/login";
       });
   }, []);
   return (
