@@ -1,11 +1,11 @@
 import React from "react";
 import "./serverinfo.css";
 
-const ServerInfo = () => {
+const ServerInfo = ({ serverInfo, setServerInfo }) => {
   return (
     <div id="serverInfo">
       <div className="serverInfo__serverName">
-        <h2>Server Name</h2>
+        <h2>{serverInfo.serverName ? serverInfo.serverName : "Server"}</h2>
       </div>
       <div className="serverInfo__textChannelsContainer">
         <p>Text Channels</p>

@@ -12,6 +12,8 @@ function Dashboard({ setServerModal }) {
   const [selectedGroup, setSelectedGroup] = useState("home");
   const [username, setUsername] = useState("");
 
+  const [serverInfo, setServerInfo] = useState({});
+
   // to check if it equals the home page  /me/
   const pathName = window.location.pathname.slice(1, 3);
   let navigate = useNavigate();
@@ -83,12 +85,12 @@ function Dashboard({ setServerModal }) {
 
         {pathName !== "me" && (
           <>
-            <ServerInfo />
+            <ServerInfo serverInfo={serverInfo} setServerInfo={setServerInfo} />
           </>
         )}
       </div>
       <div className="rightDashboard">
-        <Outlet context={{ socket, username }} />
+        <Outlet context={{ socket, username, serverInfo, setServerInfo }} />
       </div>
     </div>
   );

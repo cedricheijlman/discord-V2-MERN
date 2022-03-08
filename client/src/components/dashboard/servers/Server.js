@@ -1,11 +1,12 @@
 import Axios from "axios";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import "./server.css";
 
 export const Server = () => {
   const [allUsers, setAllUsers] = React.useState([]);
-  const [serverInfo, setServerInfo] = React.useState({});
+
+  const { setServerInfo } = useOutletContext();
 
   // Get Id Server
   let { id } = useParams();
