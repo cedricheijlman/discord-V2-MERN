@@ -10,6 +10,9 @@ const openServer = async (req, res) => {
     const serverInfo = await Server.findOne({
       _id: serverId,
       "members.userId": decodedJwt.id,
+    }).populate({
+      path: "members.userId",
+      select: "username",
     });
 
     res.status(200).json({ message: "Open Server", serverInfo });
