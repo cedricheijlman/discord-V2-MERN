@@ -4,9 +4,12 @@ import { useParams } from "react-router-dom";
 import "./server.css";
 
 export const Server = () => {
+  const [allUsers, setAllUsers] = React.useState([]);
+  const [serverInfo, setServerInfo] = React.useState({});
+
   // Get Id Server
   let { id } = useParams();
-  console.log(id);
+
   // When user on Server Page
   useEffect(() => {
     console.log(id);
@@ -15,7 +18,8 @@ export const Server = () => {
       serverId: id,
     })
       .then((res) => {
-        console.log(res);
+        setAllUsers(res.data.serverInfo.members);
+        setServerInfo(res.data.serverInfo);
       })
       .catch(() => {
         window.location.pathname = "/me/friends";
@@ -26,8 +30,13 @@ export const Server = () => {
     <div id="server">
       <div className="server__messagesContainer"></div>
       <div className="server__userList">
-        <div className="server__userInfo">User 1</div>
-        <div className="server__userInfo">User 2</div>
+        {allUsers.map((user, index) => {
+          return (
+            <div key={index} className="server__userInfo">
+              {user.userId.username}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
