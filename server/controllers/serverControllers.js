@@ -4,8 +4,17 @@ const Server = require("../models/servers");
 
 const openServer = async (req, res) => {
   try {
-    res.status(200).json({ message: "Open Server" });
+    const { accessKey, serverId } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+    // check if user is in server
+    const serverInfo = await Server.findOne({
+      _id: serverId,
+      "members.userId": decodedJwt.id,
+    });
+
+    res.status(200).json({ message: "Open Server", serverInfo });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: "Error" });
   }
 };

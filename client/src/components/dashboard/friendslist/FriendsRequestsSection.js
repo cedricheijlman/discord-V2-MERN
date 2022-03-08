@@ -9,9 +9,13 @@ export const FriendsRequestsSection = () => {
   useEffect(() => {
     Axios.post("http://localhost:3001/allFriendRequests", {
       accessKey: localStorage.getItem("accessKey"),
-    }).then((res) => {
-      setAllFriendRequests(res.data.allRequests);
-    });
+    })
+      .then((res) => {
+        setAllFriendRequests(res.data.allRequests);
+      })
+      .catch((err) => {
+        window.location.pathname = "/login";
+      });
   }, [change]);
 
   return (
