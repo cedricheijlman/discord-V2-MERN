@@ -5,6 +5,7 @@
   width: 100%;
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 
 .serverInfo__serverName {
@@ -21,10 +22,33 @@
 .serverInfo__textChannelsContainer {
   padding-top: 20px;
   padding-left: 20px;
+  height: 100%;
 }
 
 .serverInfo__textChannelsContainer p {
   color: grey;
 
+  width: 100%;
+}
+
+.serverInfo__textChannels {
+  margin-top: 10px;
+  border-top: 2px solid grey;
+  height: 90%;
   width: 95%;
+}
+
+.serverInfo__textChannel {
+  margin: 7px 0;
+  font-weight: 600;
+  padding: 8px;
+  font-size: 14px;
+  color: grey;
+  border-radius: 5px;
+}
+
+.serverInfo__textChannel:hover {
+  color: lightgrey;
+  cursor: pointer;
+  background-color: rgb(67, 66, 66);
 }
