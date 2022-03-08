@@ -5,6 +5,7 @@ const serversSchema = new mongoose.Schema(
     serverName: { type: String },
     private: { type: Boolean },
     password: { type: String },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     members: [
       {
         userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
