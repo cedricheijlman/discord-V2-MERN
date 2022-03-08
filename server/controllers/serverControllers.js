@@ -21,7 +21,7 @@ const createServer = async (req, res) => {
       members: [{ userId: decodedJwt.id, role: "Admin" }],
     });
 
-    return res.status(200).json({ message: "Created Server" });
+    return res.status(200).json({ message: "Created Server", newServer });
   } catch (error) {
     return res.status(400).json({ message: "Error" });
   }

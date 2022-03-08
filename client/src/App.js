@@ -23,7 +23,8 @@ function App() {
         private: toggled ? true : false,
         password: toggled ? serverPasswordInput : "",
       }).then((res) => {
-        console.log(res);
+        console.log(res.data);
+        window.location.pathname = "/servers/" + res.data.newServer._id;
       });
     }
   };
