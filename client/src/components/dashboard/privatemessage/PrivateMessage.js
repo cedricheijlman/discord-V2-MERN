@@ -22,11 +22,11 @@ export const PrivateMessage = () => {
     if (messageInput !== "" && messageInput !== null) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,
-        sentBy: username,
+        sentBy: { username },
       });
       setMessages((list) => [
         ...list,
-        { message: messageInput, username: username },
+        { message: messageInput, sentBy: { username } },
       ]);
       setMessageInput("");
     }
@@ -65,6 +65,7 @@ export const PrivateMessage = () => {
       </div>
       <ScrollToBottom className="privateMessage__box">
         {messages.map((message, index) => {
+          console.log(message);
           return (
             <Message
               key={index}
