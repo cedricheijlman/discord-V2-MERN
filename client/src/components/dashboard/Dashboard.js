@@ -5,6 +5,7 @@ import "./dashboard.css";
 import HomeIcon from "@mui/icons-material/Home";
 import { GroupItem } from "./GroupItem";
 import io from "socket.io-client";
+import ServerInfo from "./servers/ServerInfo";
 const socket = io.connect("http://localhost:3001");
 
 function Dashboard({ setServerModal }) {
@@ -82,7 +83,7 @@ function Dashboard({ setServerModal }) {
 
         {pathName !== "me" && (
           <>
-            <div>Server</div>
+            <ServerInfo />
           </>
         )}
       </div>

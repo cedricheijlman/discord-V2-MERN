@@ -5,6 +5,7 @@
   background-color: rgb(53, 55, 59);
   border-radius: 4px;
   margin: 15px 0;
+  width: 90%;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;

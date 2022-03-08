@@ -10,6 +10,7 @@ import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { Switch } from "@mui/material";
 import { PrivateMessage } from "./components/dashboard/privatemessage/PrivateMessage";
+import { Server } from "./components/dashboard/servers/Server";
 
 function App() {
   const customStylesModal = {
@@ -41,7 +42,12 @@ function App() {
       >
         <h2>Create a server</h2>
         <p>A server is a place where you and your friends can meet.</p>
-        <form className="createServerForm">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="createServerForm"
+        >
           <CloseIcon
             onClick={() => {
               setServerModal(false);
@@ -74,7 +80,13 @@ function App() {
                 disabled={toggled == true ? false : true}
               />
             </div>
-            <button>Create Server</button>
+            <button
+              onClick={() => {
+                console.log("heeellek");
+              }}
+            >
+              Create Server
+            </button>
           </div>
         </form>
       </Modal>
@@ -86,7 +98,7 @@ function App() {
         <Route path="/" element={<Dashboard setServerModal={setServerModal} />}>
           <Route path="me/friends" element={<FriendsList />} />
           <Route path="me/:id" element={<PrivateMessage />} />
-          <Route path="servers/:id" element={<h1>Server</h1>} />
+          <Route path="servers/:id" element={<Server />} />
         </Route>
 
         <Route path="*" element={<Navigate replace to="/register" />} />
