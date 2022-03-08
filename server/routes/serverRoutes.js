@@ -5,4 +5,6 @@ const controller = require("../controllers/serverControllers");
 
 router.post("/createServer", requireAuth, controller.createServer);
 
+router.post("/openServer", requireAuth, controller.openServer);
+
 module.exports = router;
