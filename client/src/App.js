@@ -49,8 +49,6 @@ function App() {
             className="closeIcon"
           />
           <div className="form">
-            <input type="file" id="myFile" name="filename" />
-
             <h5>Server Name</h5>
             <input placeholder="Server Name" />
             <div>
