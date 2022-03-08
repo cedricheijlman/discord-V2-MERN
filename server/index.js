@@ -10,6 +10,7 @@ const app = express();
 
 const authRoutes = require("./routes/authRoutes");
 const friendsRoutes = require("./routes/friendsRoutes");
+const serverRoutes = require("./routes/serverRoutes");
 
 const PrivateMessage = require("./models/privatemessage");
 
@@ -20,6 +21,7 @@ const server = http.createServer(app);
 
 app.use("/", authRoutes);
 app.use("/", friendsRoutes);
+app.use("/", serverRoutes);
 
 const io = new Server(server, {
   cors: { origin: "http://localhost:3000" },

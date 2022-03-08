@@ -11,8 +11,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Switch } from "@mui/material";
 import { PrivateMessage } from "./components/dashboard/privatemessage/PrivateMessage";
 import { Server } from "./components/dashboard/servers/Server";
+import Axios from "axios";
 
 function App() {
+  // Create Server Handle
+  const handleCreateServer = () => {};
+
+  // Create Server Modal Styles
   const customStylesModal = {
     content: {
       top: "50%",
@@ -31,13 +36,19 @@ function App() {
     },
   };
   const [serverModal, setServerModal] = React.useState(false);
+  const [serverNameInput, setServerNameInput] = React.useState("");
   const [toggled, setToggled] = React.useState(false);
+  const [serverPasswordInput, setServerPasswordInput] = React.useState("");
   Modal.setAppElement("#root");
   return (
     <div className="App">
       <Modal
         style={customStylesModal}
-        onRequestClose={() => setServerModal(false)}
+        onRequestClose={() => {
+          setServerNameInput("");
+          setServerPasswordInput("");
+          setServerModal(false);
+        }}
         isOpen={serverModal}
       >
         <h2>Create a server</h2>
@@ -45,18 +56,27 @@ function App() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            handleCreateServer();
           }}
           className="createServerForm"
         >
           <CloseIcon
             onClick={() => {
+              setServerNameInput("");
+              setServerPasswordInput("");
               setServerModal(false);
             }}
             className="closeIcon"
           />
           <div className="form">
             <h5>Server Name</h5>
-            <input placeholder="Server Name" />
+            <input
+              value={serverNameInput}
+              onChange={(e) => {
+                setServerNameInput(e.target.value);
+              }}
+              placeholder="Server Name"
+            />
             <div>
               <div
                 style={{
@@ -71,6 +91,10 @@ function App() {
                 />
               </div>
               <input
+                value={serverPasswordInput}
+                onChange={(e) => {
+                  setServerPasswordInput(e.target.value);
+                }}
                 type={"password"}
                 placeholder={
                   toggled == true
@@ -80,13 +104,7 @@ function App() {
                 disabled={toggled == true ? false : true}
               />
             </div>
-            <button
-              onClick={() => {
-                console.log("heeellek");
-              }}
-            >
-              Create Server
-            </button>
+            <button>Create Server</button>
           </div>
         </form>
       </Modal>
