@@ -18,6 +18,7 @@ function App() {
   const handleCreateServer = () => {
     Axios.post("http://localhost:3001/createServer", {
       accessKey: localStorage.getItem("accessKey"),
+      serverName: serverNameInput,
     }).then((res) => {
       console.log(res);
     });

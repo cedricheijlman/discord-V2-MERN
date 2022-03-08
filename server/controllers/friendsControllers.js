@@ -9,6 +9,7 @@ const { find } = require("../models/privatemessage");
 const allFriends = async (req, res) => {
   try {
     const { accessKey } = req.body;
+
     const decodedJwt = jwt.decode(accessKey);
 
     User.findOne({ _id: mongoose.Types.ObjectId(decodedJwt.id) })
