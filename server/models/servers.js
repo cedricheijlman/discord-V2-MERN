@@ -16,6 +16,7 @@ const serversSchema = new mongoose.Schema(
       {
         sentBy: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
         message: { type: String },
+        channel: { type: String },
         timeSent: { type: Date },
       },
     ],
