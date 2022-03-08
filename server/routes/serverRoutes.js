@@ -3,6 +3,6 @@ const router = express.Router();
 const { requireAuth } = require("../middleware/authMiddleware");
 const controller = require("../controllers/serverControllers");
 
-router.post("/createServer", controller.createServer);
+router.post("/createServer", requireAuth, controller.createServer);
 
 module.exports = router;

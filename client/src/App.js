@@ -15,7 +15,13 @@ import Axios from "axios";
 
 function App() {
   // Create Server Handle
-  const handleCreateServer = () => {};
+  const handleCreateServer = () => {
+    Axios.post("http://localhost:3001/createServer", {
+      accessKey: localStorage.getItem("accessKey"),
+    }).then((res) => {
+      console.log(res);
+    });
+  };
 
   // Create Server Modal Styles
   const customStylesModal = {
