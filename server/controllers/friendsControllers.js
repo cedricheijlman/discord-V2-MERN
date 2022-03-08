@@ -18,7 +18,6 @@ const allFriends = async (req, res) => {
         return res.status(200).json({ allFriends: friends.friends });
       });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({ message: "error" });
   }
 };
@@ -28,11 +27,11 @@ const privateMessage = async (req, res) => {
   try {
     const { accessKey, friend } = req.body;
     const decodedJwt = jwt.decode(accessKey);
-    console.log(decodedJwt.id, "fwkofow");
+
     const userId = decodedJwt.id;
 
     if (String(friend).length > 24) {
-      return res.status(200).json({ message: "too long" });
+      return res.status(200).json({ message: "Too long" });
     }
 
     const checkIfUserExists = await User.findOne({
@@ -40,7 +39,7 @@ const privateMessage = async (req, res) => {
     });
 
     if (!checkIfUserExists) {
-      return res.status(200).json({ message: "wrong" });
+      return res.status(200).json({ message: "Wrong" });
     }
 
     const check = await PrivateMessage.findOne({
@@ -51,7 +50,6 @@ const privateMessage = async (req, res) => {
     });
 
     if (check) {
-      console.log(check);
       return res.status(200).json({
         privateMessageId: check._id,
         friendId: checkIfUserExists._id,
@@ -66,8 +64,7 @@ const privateMessage = async (req, res) => {
 
     return res.status(200).json({ message: "worked" });
   } catch (error) {
-    console.log(error);
-    return res.status(200).json({ message: "dkowfkwo" });
+    return res.status(400).json({ message: "Error" });
   }
 };
 
@@ -134,7 +131,6 @@ const deleteFriend = async (req, res) => {
 
     return res.status(200).json({ message: "deleted" });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: error });
   }
 };
@@ -228,7 +224,6 @@ const addFriend = async (req, res) => {
 
     return res.status(200).json({ message: "Friend Request Sent" });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "error" });
   }
 };

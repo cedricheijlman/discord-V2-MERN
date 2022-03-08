@@ -17,8 +17,6 @@ export const PrivateMessage = () => {
 
   // Handle When Message Is sent
   const handleSendMessage = async () => {
-    console.log(messageInput);
-
     if (messageInput !== "" && messageInput !== null) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,
@@ -34,7 +32,6 @@ export const PrivateMessage = () => {
 
   useEffect(async () => {
     await socket.on("message_recieved", (messageInput) => {
-      console.log(messageInput);
       setMessages((list) => [...list, messageInput]);
     });
   }, [socket]);
@@ -47,12 +44,23 @@ export const PrivateMessage = () => {
     Axios.post("http://localhost:3001/privateMessage", {
       accessKey: localStorage.getItem("accessKey"),
       friend: id,
-    }).then((res) => {
-      console.log(res.data.messages);
-      setFriendInfo(res.data);
-      setMessages(res.data.messages);
-      socket.emit("join_privateMessage", res.data.privateMessageId);
-    });
+    })
+      .then((res) => {
+        if (
+          res.data.message == "Error" ||
+          res.data.message == "Wrong" ||
+          res.data.message == "Too long"
+        ) {
+          window.location.pathname = "/me/friends";
+        }
+
+        setFriendInfo(res.data);
+        setMessages(res.data.messages);
+        socket.emit("join_privateMessage", res.data.privateMessageId);
+      })
+      .catch(() => {
+        window.location.pathname = "/me/friends";
+      });
   }, []);
 
   return (
@@ -64,16 +72,16 @@ export const PrivateMessage = () => {
         </div>
       </div>
       <ScrollToBottom className="privateMessage__box">
-        {messages.map((message, index) => {
-          console.log(message);
-          return (
-            <Message
-              key={index}
-              username={message.sentBy.username}
-              messageValue={message.message}
-            />
-          );
-        })}
+        {messages &&
+          messages.map((message, index) => {
+            return (
+              <Message
+                key={index}
+                username={message.sentBy.username}
+                messageValue={message.message}
+              />
+            );
+          })}
       </ScrollToBottom>
       <div className="privateMessage__sendMessage">
         <input

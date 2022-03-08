@@ -23,7 +23,6 @@ function Dashboard({ setServerModal }) {
         if (!result.status == 200) {
           window.location.pathname = "/login";
         } else {
-          console.log(result.data.payload);
           setUsername(result.data.payload.username);
           await socket.emit(
             "loggedIn",

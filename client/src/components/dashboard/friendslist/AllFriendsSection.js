@@ -10,7 +10,6 @@ export const AllFriendsSection = () => {
     })
       .then((result) => {
         setAllFriends(result.data.allFriends);
-        console.log(result);
       })
       .catch((err) => {
         localStorage.removeItem("accessToken");

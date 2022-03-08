@@ -40,7 +40,6 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", async (privateMessageId, messageInput) => {
     if (messageInput.message !== "") {
-      console.log(messageInput, privateMessageId);
       const test = await PrivateMessage.findOneAndUpdate(
         { _id: privateMessageId },
         {
@@ -52,7 +51,7 @@ io.on("connection", (socket) => {
           },
         }
       );
-      console.log("test", test);
+
       socket.to(privateMessageId).emit("message_recieved", messageInput);
     }
   });

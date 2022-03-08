@@ -4,7 +4,6 @@ import Axios from "axios";
 
 export const RequestCard = ({ request, setChange, change }) => {
   const handleAcceptRequest = () => {
-    console.log(request._id);
     Axios.post("http://localhost:3001/addFriend", {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: request.username,
@@ -20,7 +19,6 @@ export const RequestCard = ({ request, setChange, change }) => {
         friend: request._id,
       },
     }).then((result) => {
-      console.log(result);
       window.location.reload();
     });
   };

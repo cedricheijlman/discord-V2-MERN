@@ -30,7 +30,6 @@ function Login() {
 
   // handle login
   const handleLogin = () => {
-    console.log(email, password);
     if (email && password && email !== "" && password !== "") {
       Axios.post("http://localhost:3001/login", {
         email: email,
@@ -38,14 +37,13 @@ function Login() {
       })
         .then((result) => {
           if (result.status == 200) {
-            console.log(result);
             localStorage.setItem("accessKey", result.data.accessToken);
             localStorage.setItem("userId", result.data.id);
             navigate("/dashboard");
           }
         })
         .catch((err) => {
-          console.log(err);
+          window.location.reload();
         });
     }
   };

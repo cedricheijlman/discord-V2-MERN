@@ -28,7 +28,7 @@ export const AddFriendSection = () => {
         }, 1300);
       })
       .catch((err) => {
-        console.log("err", err.message);
+        window.location.pathname = "/me/friends";
       });
   };
 
