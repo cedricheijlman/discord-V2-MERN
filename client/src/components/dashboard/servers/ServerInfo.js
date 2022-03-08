@@ -10,8 +10,8 @@ const ServerInfo = () => {
       <div className="serverInfo__textChannelsContainer">
         <p>Text Channels</p>
         <div className="serverInfo__textChannels">
-          <div className="serverInfo__textChannel">Text Channel</div>
-          <div className="serverInfo__textChannel">Text Channel</div>
+          <div className="serverInfo__textChannel">General Chat</div>
+          <div className="serverInfo__textChannel">Admin Chat</div>
         </div>
       </div>
     </div>
