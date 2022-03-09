@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", async (privateMessageId, messageInput) => {
-    if (messageInput.message !== "") {
+    if (messageInput.message !== "" && socket.userId) {
       const test = await PrivateMessage.findOneAndUpdate(
         { _id: privateMessageId },
         {

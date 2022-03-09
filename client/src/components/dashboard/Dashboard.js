@@ -39,6 +39,9 @@ function Dashboard({ setServerModal }) {
       });
   }, []);
 
+  // get users servers/groups
+  useEffect(() => {}, []);
+
   const items = [{ name: "home0" }, { name: "home1" }, { name: "home2" }];
 
   return (

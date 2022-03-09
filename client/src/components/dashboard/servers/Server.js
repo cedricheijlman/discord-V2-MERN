@@ -21,15 +21,26 @@ export const Server = () => {
       .then((res) => {
         setAllUsers(res.data.serverInfo.members);
         setServerInfo(res.data.serverInfo);
+        console.log(res.data.serverInfo);
       })
       .catch(() => {
         window.location.pathname = "/me/friends";
       });
+
+    return () => {
+      setServerInfo("");
+    };
   }, [id]);
 
   return (
     <div id="server">
-      <div className="server__messagesContainer"></div>
+      <div className="server__messagesContainer">
+        <div className="server__messageHeader">General Chat</div>
+        <div className="server__messageList">Message list</div>
+        <div className="server__messageInput">
+          <input placeholder="Send Message" />
+        </div>
+      </div>
       <div className="server__userList">
         {allUsers.map((user, index) => {
           return (

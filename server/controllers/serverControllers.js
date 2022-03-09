@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Server = require("../models/servers");
 
+const getUserJoinedServers = async (req, res) => {
+  try {
+    res.status(200).json({ message: "storm leeuwin" });
+  } catch (error) {
+    res.status(200).json({ message: "storm error" });
+  }
+};
+
 const openServer = async (req, res) => {
   try {
     const { accessKey, serverId } = req.body;
@@ -50,4 +58,5 @@ const createServer = async (req, res) => {
 module.exports = {
   createServer,
   openServer,
+  getUserJoinedServers,
 };

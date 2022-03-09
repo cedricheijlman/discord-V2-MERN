@@ -20,7 +20,6 @@ export const PrivateMessage = () => {
     if (messageInput !== "" && messageInput !== null) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,
-        sentBy: { username },
       });
       setMessages((list) => [
         ...list,
