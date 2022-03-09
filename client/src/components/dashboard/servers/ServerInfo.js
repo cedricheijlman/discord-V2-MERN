@@ -19,14 +19,6 @@ const ServerInfo = ({ serverInfo, setServerInfo }) => {
           >
             General Chat
           </div>
-          <div
-            onClick={() => setTextChannel("Super")}
-            className={`serverInfo__textChannel ${
-              textChannel == "Super" ? "check" : ""
-            }`}
-          >
-            Super Chat
-          </div>
         </div>
       </div>
     </div>

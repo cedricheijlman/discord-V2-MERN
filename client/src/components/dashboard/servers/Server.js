@@ -29,6 +29,7 @@ export const Server = () => {
 
     return () => {
       setServerInfo("");
+      setAllUsers([]);
     };
   }, [id]);
 
