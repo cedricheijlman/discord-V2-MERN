@@ -4,8 +4,16 @@ const Server = require("../models/servers");
 
 const getUserJoinedServers = async (req, res) => {
   try {
-    res.status(200).json({ message: "storm leeuwin" });
+    const { accessKey } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+
+    const allServers = await Server.find({
+      "members.userId": decodedJwt.id,
+    });
+
+    res.status(200).json({ message: "storm leeuwin", allServers });
   } catch (error) {
+    console.log(error);
     res.status(200).json({ message: "storm error" });
   }
 };

@@ -8,13 +8,18 @@ export const GroupItem = ({
   name,
   setSelectedGroup,
   setServerModal,
+  serverId,
 }) => {
   const navigate = useNavigate();
   const add = true;
 
   // check if is home button or server
   const handleClick = (nameButton) => {
-    if (name !== "add") {
+    if (name !== "add" && name !== "home") {
+      setSelectedGroup(serverId);
+    }
+
+    if (name == "home") {
       setSelectedGroup(name);
     }
 
@@ -25,13 +30,16 @@ export const GroupItem = ({
     if (nameButton == "home") {
       navigate("/me/friends");
     } else if (name !== "add") {
-      navigate(`/servers/${nameButton}`);
+      navigate(`/servers/${serverId}`);
     }
   };
 
   return (
     <div
-      style={{ borderLeft: selected == name ? "4px solid white" : "" }}
+      style={{
+        borderLeft:
+          selected == serverId || selected == name ? "4px solid white" : "",
+      }}
       className="dashboard__homeButtonSelect"
     >
       <div

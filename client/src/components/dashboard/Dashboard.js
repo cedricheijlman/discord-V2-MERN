@@ -11,6 +11,7 @@ const socket = io.connect("http://localhost:3001");
 function Dashboard({ setServerModal }) {
   const [selectedGroup, setSelectedGroup] = useState("home");
   const [username, setUsername] = useState("");
+  const [allServers, setAllServers] = useState([]);
 
   const [serverInfo, setServerInfo] = useState({});
 
@@ -40,7 +41,14 @@ function Dashboard({ setServerModal }) {
   }, []);
 
   // get users servers/groups
-  useEffect(() => {}, []);
+  useEffect(() => {
+    Axios.post("http://localhost:3001/getUserJoinedServers", {
+      accessKey: localStorage.getItem("accessKey"),
+    }).then((res) => {
+      setAllServers(res.data.allServers);
+      console.log(res);
+    });
+  }, []);
 
   const items = [{ name: "home0" }, { name: "home1" }, { name: "home2" }];
 
@@ -53,10 +61,11 @@ function Dashboard({ setServerModal }) {
           name="home"
         />
         <div className="joinedGroupsDashboard">
-          {items.map((item, index) => {
+          {allServers.map((item, index) => {
             return (
               <GroupItem
                 key={index}
+                serverId={item._id}
                 selected={selectedGroup}
                 setSelectedGroup={setSelectedGroup}
                 name={item.name}
