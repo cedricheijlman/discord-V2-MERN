@@ -39,9 +39,14 @@ export const Server = () => {
   }, [id]);
 
   const handleSendMessage = async () => {
-    if (inputMessage !== "" && inputMessage !== null) {
+    if (
+      inputMessage !== "" &&
+      inputMessage !== null &&
+      inputMessage.replace(/\s/g, "").length
+    ) {
       console.log("send Message");
-      await serverMessages.push({
+      console.log(inputMessage.length);
+      serverMessages.push({
         message: inputMessage,
         sentBy: { username: "cedricc" },
       });

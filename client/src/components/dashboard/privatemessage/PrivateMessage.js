@@ -17,7 +17,11 @@ export const PrivateMessage = () => {
 
   // Handle When Message Is sent
   const handleSendMessage = async () => {
-    if (messageInput !== "" && messageInput !== null) {
+    if (
+      messageInput !== "" &&
+      messageInput !== null &&
+      inputMessage.replace(/\s/g, "").length
+    ) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,
       });
