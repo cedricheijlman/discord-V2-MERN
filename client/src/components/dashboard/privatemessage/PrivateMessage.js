@@ -20,7 +20,7 @@ export const PrivateMessage = () => {
     if (
       messageInput !== "" &&
       messageInput !== null &&
-      inputMessage.replace(/\s/g, "").length
+      messageInput.replace(/\s/g, "").length
     ) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,

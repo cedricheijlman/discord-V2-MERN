@@ -36,6 +36,10 @@ io.on("connection", (socket) => {
     onlineUsers.push(userId);
   });
 
+  socket.on("join_serverLive", (serverId) => {
+    socket.join(serverId);
+  });
+
   socket.on("join_privateMessage", (privateMessageId) => {
     socket.join(privateMessageId);
   });

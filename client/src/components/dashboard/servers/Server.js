@@ -15,6 +15,8 @@ export const Server = () => {
   // Get Id Server
   let { id } = useParams();
 
+  const { socket, username } = useOutletContext();
+
   // When user on Server Page
   useEffect(() => {
     console.log(id);
@@ -26,6 +28,7 @@ export const Server = () => {
         setAllUsers(res.data.serverInfo.members);
         setServerInfo(res.data.serverInfo);
         setServerMessages(res.data.serverInfo.messages);
+        socket.emit("join_serverLive", id);
         console.log(res.data.serverInfo.messages);
       })
       .catch(() => {
