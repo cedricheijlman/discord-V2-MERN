@@ -1,10 +1,14 @@
 import Axios from "axios";
 import React, { useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
+import ScrollToBottom from "react-scroll-to-bottom";
+import { Message } from "../privatemessage/Message";
 import "./server.css";
 
 export const Server = () => {
   const [allUsers, setAllUsers] = React.useState([]);
+  const [serverMessages, setServerMessages] = React.useState([]);
+  const [inputMessage, setInputMessage] = React.useState("");
 
   const { setServerInfo } = useOutletContext();
 
@@ -21,7 +25,8 @@ export const Server = () => {
       .then((res) => {
         setAllUsers(res.data.serverInfo.members);
         setServerInfo(res.data.serverInfo);
-        console.log(res.data.serverInfo);
+        setServerMessages(res.data.serverInfo.messages);
+        console.log(res.data.serverInfo.messages);
       })
       .catch(() => {
         window.location.pathname = "/me/friends";
@@ -33,13 +38,46 @@ export const Server = () => {
     };
   }, [id]);
 
+  const handleSendMessage = async () => {
+    if (inputMessage !== "" && inputMessage !== null) {
+      console.log("send Message");
+      await serverMessages.push({
+        message: inputMessage,
+        sentBy: { username: "cedricc" },
+      });
+      setInputMessage("");
+    }
+  };
+
   return (
     <div id="server">
       <div className="server__messagesContainer">
         <div className="server__messageHeader">General Chat</div>
-        <div className="server__messageList">Message list</div>
+
+        <ScrollToBottom className="server__messageList">
+          {serverMessages.map((message, index) => {
+            return (
+              <Message
+                key={index}
+                username={message.sentBy.username}
+                messageValue={message.message}
+              />
+            );
+          })}
+        </ScrollToBottom>
         <div className="server__messageInput">
-          <input placeholder="Send Message" />
+          <input
+            onKeyPress={(e) => {
+              if (e.code == "Enter") {
+                handleSendMessage();
+              }
+            }}
+            value={inputMessage}
+            onChange={(e) => {
+              setInputMessage(e.target.value);
+            }}
+            placeholder="Send Message"
+          />
         </div>
       </div>
       <div className="server__userList">
