@@ -46,11 +46,9 @@ function Dashboard({ setServerModal }) {
       accessKey: localStorage.getItem("accessKey"),
     }).then((res) => {
       setAllServers(res.data.allServers);
-      console.log(res);
+      console.log(res.data.allServers);
     });
   }, []);
-
-  const items = [{ name: "home0" }, { name: "home1" }, { name: "home2" }];
 
   return (
     <div id="dashboard">
@@ -69,6 +67,7 @@ function Dashboard({ setServerModal }) {
                 selected={selectedGroup}
                 setSelectedGroup={setSelectedGroup}
                 name={item.name}
+                serverName={item.serverName}
               />
             );
           })}

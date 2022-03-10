@@ -9,6 +9,7 @@ export const GroupItem = ({
   setSelectedGroup,
   setServerModal,
   serverId,
+  serverName,
 }) => {
   const navigate = useNavigate();
   const add = true;
@@ -50,6 +51,9 @@ export const GroupItem = ({
       >
         {name == "add" && <AddIcon />}
         {name == "home" && <HomeIcon />}
+        {name !== "add" &&
+          name !== "home" &&
+          `${serverName[0] + serverName[1]}`}
       </div>
     </div>
   );

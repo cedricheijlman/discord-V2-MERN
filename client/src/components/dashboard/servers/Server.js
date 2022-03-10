@@ -29,7 +29,7 @@ export const Server = () => {
         setServerInfo(res.data.serverInfo);
         setServerMessages(res.data.serverInfo.messages);
         socket.emit("join_serverLive", id);
-        console.log(res.data.serverInfo.messages);
+        console.log(res.data.serverInfo);
       })
       .catch(() => {
         window.location.pathname = "/me/friends";
