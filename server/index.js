@@ -13,6 +13,7 @@ const friendsRoutes = require("./routes/friendsRoutes");
 const serverRoutes = require("./routes/serverRoutes");
 
 const PrivateMessage = require("./models/privatemessage");
+const ServerModel = require("./models/servers");
 
 app.use(cors());
 app.use(express.json());
@@ -42,6 +43,24 @@ io.on("connection", (socket) => {
 
   socket.on("join_privateMessage", (privateMessageId) => {
     socket.join(privateMessageId);
+  });
+
+  socket.on("send_messageServer", async (serverId, messageInput) => {
+    if (messageInput.message !== "" && socket.userId) {
+      const test = await ServerModel.findOneAndUpdate(
+        { _id: serverId },
+        {
+          $push: {
+            messages: {
+              message: messageInput.message,
+              sentBy: socket.userId,
+            },
+          },
+        }
+      );
+
+      socket.to(serverId).emit("message_recievedServer", messageInput);
+    }
   });
 
   socket.on("send_message", async (privateMessageId, messageInput) => {

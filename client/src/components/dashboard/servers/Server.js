@@ -49,6 +49,10 @@ export const Server = () => {
     ) {
       console.log("send Message");
       console.log(inputMessage.length);
+      await socket.emit("send_messageServer", id, {
+        message: inputMessage,
+        sentBy: { username },
+      });
       serverMessages.push({
         message: inputMessage,
         sentBy: { username: "cedricc" },
@@ -56,6 +60,12 @@ export const Server = () => {
       setInputMessage("");
     }
   };
+
+  useEffect(async () => {
+    await socket.on("message_recievedServer", (messageInput) => {
+      serverMessages.push(messageInput);
+    });
+  }, [socket]);
 
   return (
     <div id="server">

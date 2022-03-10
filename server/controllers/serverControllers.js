@@ -27,7 +27,7 @@ const openServer = async (req, res) => {
       _id: serverId,
       "members.userId": decodedJwt.id,
     }).populate({
-      path: "members.userId",
+      path: "messages.sentBy",
       select: "username",
     });
 
