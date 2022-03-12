@@ -55,6 +55,15 @@ function Dashboard({ setServerModal }) {
   // Handle Join Server
   const handleJoinServer = () => {
     if (joinServerInput !== "" && joinServerInput !== null) {
+      Axios.post("http://localhost:3001/joinServer", {
+        accessKey: localStorage.getItem("accessKey"),
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
