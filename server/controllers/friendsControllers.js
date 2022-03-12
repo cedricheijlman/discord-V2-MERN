@@ -35,6 +35,10 @@ const privateMessage = async (req, res) => {
       return res.status(200).json({ message: "Too long" });
     }
 
+    if (userId == friend) {
+      return res.status(200).json({ message: "Your id" });
+    }
+
     const checkIfUserExists = await User.findOne({
       _id: mongoose.Types.ObjectId(friend),
     });
