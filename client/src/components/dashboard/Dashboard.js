@@ -53,9 +53,8 @@ function Dashboard({ setServerModal }) {
 
   const [joinServerInput, setJoinServerInput] = useState("");
   // Handle Join Server
-  const handleJoinServer = (e) => {
-    if (e.target.value !== "") {
-      console.log(e.target.value);
+  const handleJoinServer = () => {
+    if (joinServerInput !== "" && joinServerInput !== null) {
     }
   };
 
@@ -98,7 +97,6 @@ function Dashboard({ setServerModal }) {
               value={joinServerInput}
               onChange={(e) => {
                 if (e.nativeEvent.data !== " ") {
-                  console.log(e);
                   setJoinServerInput(e.target.value);
                 }
               }}
