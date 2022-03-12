@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useEffect } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { Message } from "../privatemessage/Message";
 import "./server.css";
@@ -9,7 +9,7 @@ export const Server = () => {
   const [allUsers, setAllUsers] = React.useState([]);
   const [serverMessages, setServerMessages] = React.useState([]);
   const [inputMessage, setInputMessage] = React.useState("");
-
+  let navigate = useNavigate();
   const { setServerInfo } = useOutletContext();
 
   // Get Id Server
@@ -100,8 +100,16 @@ export const Server = () => {
       </div>
       <div className="server__userList">
         {allUsers.map((user, index) => {
+          console.log(user);
           return (
-            <div key={index} className="server__userInfo">
+            <div
+              onClick={() => {
+                navigate(`/me/${user.userId._id}`);
+                console.log(user.userId._id);
+              }}
+              key={index}
+              className="server__userInfo"
+            >
               {user.userId.username}
             </div>
           );
