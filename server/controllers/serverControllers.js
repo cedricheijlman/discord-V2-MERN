@@ -24,6 +24,20 @@ const getUserJoinedServers = async (req, res) => {
 // join server
 const joinServer = async (req, res) => {
   try {
+    // Decode JWT Token
+    const { accessKey, serverId } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+
+    // check if user is in server or server doens't exist
+    const serverInfo = await Server.findOne({
+      _id: serverId,
+      "members.userId": decodedJwt.id,
+    });
+
+    if (serverInfo) {
+      console.log(serverInfo);
+    }
+
     res.status(200).json({ message: "Joined Server" });
   } catch (error) {
     res.status(400).json({ message: "Error" });
@@ -32,7 +46,7 @@ const joinServer = async (req, res) => {
 
 const openServer = async (req, res) => {
   try {
-    // JWT Token DECODE
+    // Decode JWT Token
     const { accessKey, serverId } = req.body;
     const decodedJwt = jwt.decode(accessKey);
 
