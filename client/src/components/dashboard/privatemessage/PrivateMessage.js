@@ -52,7 +52,8 @@ export const PrivateMessage = () => {
         if (
           res.data.message == "Error" ||
           res.data.message == "Wrong" ||
-          res.data.message == "Too long"
+          res.data.message == "Too long" ||
+          res.data.message == "Your id"
         ) {
           window.location.pathname = "/me/friends";
         }
