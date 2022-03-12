@@ -9,7 +9,7 @@
 }
 
 .server__messagesContainer {
-  background-color: rgb(55, 55, 55);
+  background-color: rgb(51, 51, 54);
   width: 75%;
   display: flex;
   flex-direction: column;

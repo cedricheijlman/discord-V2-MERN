@@ -8,7 +8,7 @@ import Register from "./components/register/Register";
 import { FriendsList } from "./components/dashboard/friendslist/FriendsList";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
-import { Switch } from "@mui/material";
+
 import { PrivateMessage } from "./components/dashboard/privatemessage/PrivateMessage";
 import { Server } from "./components/dashboard/servers/Server";
 import Axios from "axios";
@@ -16,17 +16,15 @@ import Axios from "axios";
 function App() {
   // Create Server Handle
   const handleCreateServer = () => {
-    if ((toggled && serverPasswordInput !== "") || !toggled) {
-      Axios.post("http://localhost:3001/createServer", {
-        accessKey: localStorage.getItem("accessKey"),
-        serverName: serverNameInput,
-        private: toggled ? true : false,
-        password: toggled ? serverPasswordInput : "",
-      }).then((res) => {
-        console.log(res.data);
-        window.location.pathname = "/servers/" + res.data.newServer._id;
-      });
-    }
+    Axios.post("http://localhost:3001/createServer", {
+      accessKey: localStorage.getItem("accessKey"),
+      serverName: serverNameInput,
+      private: false,
+      password: "",
+    }).then((res) => {
+      console.log(res.data);
+      window.location.pathname = "/servers/" + res.data.newServer._id;
+    });
   };
 
   // Create Server Modal Styles
@@ -49,7 +47,7 @@ function App() {
   };
   const [serverModal, setServerModal] = React.useState(false);
   const [serverNameInput, setServerNameInput] = React.useState("");
-  const [toggled, setToggled] = React.useState(false);
+
   const [serverPasswordInput, setServerPasswordInput] = React.useState("");
   Modal.setAppElement("#root");
   return (
@@ -89,35 +87,7 @@ function App() {
               }}
               placeholder="Server Name"
             />
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <h5>Private?</h5>
-                <Switch
-                  checked={toggled}
-                  onChange={(e) => {
-                    setToggled(e.target.checked);
-                  }}
-                />
-              </div>
-              <input
-                value={serverPasswordInput}
-                onChange={(e) => {
-                  setServerPasswordInput(e.target.value);
-                }}
-                type={"password"}
-                placeholder={
-                  toggled == true
-                    ? "Enter Password"
-                    : "Turn private on to have a password!"
-                }
-                disabled={toggled == true ? false : true}
-              />
-            </div>
+
             <button>Create Server</button>
           </div>
         </form>

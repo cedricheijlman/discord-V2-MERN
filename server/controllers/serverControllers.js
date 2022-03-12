@@ -11,10 +11,10 @@ const getUserJoinedServers = async (req, res) => {
       "members.userId": decodedJwt.id,
     });
 
-    res.status(200).json({ message: "storm leeuwin", allServers });
+    res.status(200).json({ message: "all servers", allServers });
   } catch (error) {
     console.log(error);
-    res.status(200).json({ message: "storm error" });
+    res.status(200).json({ message: "error" });
   }
 };
 

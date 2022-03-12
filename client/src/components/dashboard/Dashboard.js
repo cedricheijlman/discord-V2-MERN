@@ -19,6 +19,7 @@ function Dashboard({ setServerModal }) {
   const pathName = window.location.pathname.slice(1, 3);
   let navigate = useNavigate();
 
+  // validate User
   useEffect(() => {
     Axios.post("http://localhost:3001/validateUser", {
       accessTokenKey: localStorage.getItem("accessKey"),
@@ -50,6 +51,14 @@ function Dashboard({ setServerModal }) {
     });
   }, []);
 
+  const [joinServerInput, setJoinServerInput] = useState("");
+  // Handle Join Server
+  const handleJoinServer = (e) => {
+    if (e.target.value !== "") {
+      console.log(e.target.value);
+    }
+  };
+
   return (
     <div id="dashboard">
       <div className="groupsLeftDashboard">
@@ -79,18 +88,28 @@ function Dashboard({ setServerModal }) {
           />
         </div>
       </div>
+
       <div className="leftDashboard">
         {pathName == "me" && (
+          // If on homepage
           <>
-            <div
-              onClick={() => {
-                navigate("/me/friends");
+            <div className="friendsItem">Join Server With Server ID</div>
+            <input
+              value={joinServerInput}
+              onChange={(e) => {
+                if (e.nativeEvent.data !== " ") {
+                  console.log(e);
+                  setJoinServerInput(e.target.value);
+                }
               }}
-              className="friendsItem"
-            >
-              Friends
-            </div>
-            <div className="friendsItem">Chat messages</div>
+              className="serverAddInput"
+              onKeyPress={(e) => {
+                if (e.code == "Enter") {
+                  handleJoinServer();
+                }
+              }}
+              placeholder="Enter Server ID"
+            />
           </>
         )}
 
