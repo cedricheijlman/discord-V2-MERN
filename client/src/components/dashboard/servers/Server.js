@@ -29,7 +29,6 @@ export const Server = () => {
         setServerInfo(res.data.serverInfo);
         setServerMessages(res.data.serverInfo.messages);
         socket.emit("join_serverLive", id);
-        console.log(res.data.serverInfo);
       })
       .catch(() => {
         window.location.pathname = "/me/friends";
@@ -47,8 +46,6 @@ export const Server = () => {
       inputMessage !== null &&
       inputMessage.replace(/\s/g, "").length
     ) {
-      console.log("send Message");
-      console.log(inputMessage.length);
       await socket.emit("send_messageServer", id, {
         message: inputMessage,
         sentBy: { username },
@@ -100,12 +97,10 @@ export const Server = () => {
       </div>
       <div className="server__userList">
         {allUsers.map((user, index) => {
-          console.log(user);
           return (
             <div
               onClick={() => {
                 navigate(`/me/${user.userId._id}`);
-                console.log(user.userId._id);
               }}
               key={index}
               className="server__userInfo"

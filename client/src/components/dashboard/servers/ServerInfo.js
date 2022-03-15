@@ -21,6 +21,10 @@ const ServerInfo = ({ serverInfo, setServerInfo }) => {
           </div>
         </div>
       </div>
+      <div style={{ margin: "10px 10px", wordBreak: "break-all" }}>
+        <h3 style={{ color: "grey" }}>Server id:</h3>
+        <h4 style={{ color: "grey" }}>{serverInfo._id}</h4>
+      </div>
     </div>
   );
 };
