@@ -12,6 +12,7 @@ function Dashboard({ setServerModal }) {
   const [selectedGroup, setSelectedGroup] = useState("home");
   const [username, setUsername] = useState("");
   const [allServers, setAllServers] = useState([]);
+  const [joinServerMsg, setJoinServerMsg] = useState("");
 
   const [serverInfo, setServerInfo] = useState({});
 
@@ -61,9 +62,18 @@ function Dashboard({ setServerModal }) {
       })
         .then((res) => {
           console.log(res);
+          if (res.data.message == "Server already joined") {
+            console.log("already");
+            setJoinServerMsg("Already Joined Server!");
+          }
+
+          if (res.data.message == "Server doesn't exist") {
+            setJoinServerMsg("Server doesn't exist!");
+          }
         })
         .catch((err) => {
           console.log(err);
+          setJoinServerMsg("That's not a server ID!");
         });
     }
   };
@@ -118,6 +128,18 @@ function Dashboard({ setServerModal }) {
               }}
               placeholder="Enter Server ID"
             />
+            {joinServerMsg !== "" && (
+              <h3
+                style={{
+                  margin: "10px 10px",
+                  color: "white",
+                  fontStyle: "italic",
+                  textAlign: "center",
+                }}
+              >
+                {joinServerMsg}
+              </h3>
+            )}
           </>
         )}
 

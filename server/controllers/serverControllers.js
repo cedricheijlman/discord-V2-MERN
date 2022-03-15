@@ -35,8 +35,21 @@ const joinServer = async (req, res) => {
     });
 
     if (serverInfo) {
-      return res.status(200).json({ message: "server already joined" });
+      return res.status(200).json({ message: "Server already joined" });
     }
+
+    const serverExists = await Server.findOne({
+      _id: serverId,
+    });
+
+    if (!serverExists) {
+      return res.status(200).json({ message: "Server doesn't exist" });
+    }
+
+    const pushUserToServer = await Server.findOneAndUpdate(
+      { _id: serverId },
+      { $push: { members: { userId: decodedJwt.id, role: "User" } } }
+    );
 
     return res.status(200).json({ message: "Joined Server" });
   } catch (error) {
