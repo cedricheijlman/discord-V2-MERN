@@ -22,12 +22,6 @@ export const FriendsList = () => {
           All
         </p>
         <p
-          onClick={() => setFriendsOption("Online")}
-          className={friendsOption === "Online" ? "selectedFriends" : ""}
-        >
-          Online
-        </p>
-        <p
           onClick={() => setFriendsOption("allFriendRequests")}
           className={
             friendsOption === "allFriendRequests" ? "selectedFriends" : ""
@@ -46,18 +40,6 @@ export const FriendsList = () => {
 
       <div className="friends__containerBottom">
         {friendsOption == "All" && <AllFriendsSection />}
-
-        {friendsOption == "Online" && (
-          <>
-            <input placeholder="Search" />
-            {[].length > 0 &&
-              []
-                .filter((f) => f == false)
-                .map((friend, index) => {
-                  return <h1 key={index}>{friend.username}</h1>;
-                })}
-          </>
-        )}
 
         {friendsOption == "allFriendRequests" && <FriendsRequestsSection />}
 

@@ -19,7 +19,6 @@ export const AllFriendsSection = () => {
   }, []);
   return (
     <>
-      <input placeholder="Search" />
       <div className="allFriendsContainer">
         {allFriends.length > 0 &&
           allFriends.map((friend, index) => {
@@ -31,6 +30,7 @@ export const AllFriendsSection = () => {
               />
             );
           })}
+        {allFriends.length == 0 && <p>You have no friends</p>}
       </div>
     </>
   );
