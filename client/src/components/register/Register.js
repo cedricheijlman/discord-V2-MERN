@@ -82,6 +82,11 @@ function Register() {
         <div className="inputDiv">
           <span>Password</span>
           <input
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                handleRegister();
+              }
+            }}
             onChange={(e) => {
               if (e.target.value !== "") {
                 setPassword(e.target.value);
