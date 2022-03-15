@@ -24,10 +24,11 @@ export const PrivateMessage = () => {
     ) {
       await socket.emit("send_message", friendInfo.privateMessageId, {
         message: messageInput,
+        sentBy: { username: username },
       });
       setMessages((list) => [
         ...list,
-        { message: messageInput, sentBy: { username } },
+        { message: messageInput, sentBy: { username: username } },
       ]);
       setMessageInput("");
     }
