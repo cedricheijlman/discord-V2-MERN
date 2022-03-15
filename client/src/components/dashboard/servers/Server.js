@@ -10,7 +10,7 @@ export const Server = () => {
   const [serverMessages, setServerMessages] = React.useState([]);
   const [inputMessage, setInputMessage] = React.useState("");
   let navigate = useNavigate();
-  const { setServerInfo } = useOutletContext();
+  const { setServerInfo, setSelectedGroup } = useOutletContext();
 
   // Get Id Server
   let { id } = useParams();
@@ -28,6 +28,7 @@ export const Server = () => {
         setAllUsers(res.data.serverInfo.members);
         setServerInfo(res.data.serverInfo);
         setServerMessages(res.data.serverInfo.messages);
+        setSelectedGroup(id);
         socket.emit("join_serverLive", id);
       })
       .catch(() => {
@@ -60,7 +61,8 @@ export const Server = () => {
 
   useEffect(async () => {
     await socket.on("message_recievedServer", (messageInput) => {
-      serverMessages.push(messageInput);
+      console.log(messageInput);
+      setServerMessages((messages) => [...messages, messageInput]);
     });
   }, [socket]);
 

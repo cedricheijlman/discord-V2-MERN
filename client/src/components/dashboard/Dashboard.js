@@ -162,7 +162,15 @@ function Dashboard({ setServerModal }) {
         )}
       </div>
       <div className="rightDashboard">
-        <Outlet context={{ socket, username, serverInfo, setServerInfo }} />
+        <Outlet
+          context={{
+            socket,
+            username,
+            serverInfo,
+            setServerInfo,
+            setSelectedGroup,
+          }}
+        />
       </div>
     </div>
   );
