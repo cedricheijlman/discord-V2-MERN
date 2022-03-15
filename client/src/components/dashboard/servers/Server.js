@@ -102,7 +102,9 @@ export const Server = () => {
           return (
             <div
               onClick={() => {
-                navigate(`/me/${user.userId._id}`);
+                if (user.userId.username !== username) {
+                  navigate(`/me/${user.userId._id}`);
+                }
               }}
               key={index}
               className="server__userInfo"
