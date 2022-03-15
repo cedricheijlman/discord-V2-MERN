@@ -4,6 +4,7 @@ import { FriendCard } from "./friendcard/FriendCard";
 
 export const AllFriendsSection = () => {
   const [allFriends, setAllFriends] = useState([]);
+
   useEffect(() => {
     Axios.post("http://localhost:3001/allFriends", {
       accessKey: localStorage.getItem("accessKey"),

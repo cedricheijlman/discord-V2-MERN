@@ -35,12 +35,12 @@ const joinServer = async (req, res) => {
     });
 
     if (serverInfo) {
-      console.log(serverInfo);
+      return res.status(200).json({ message: "server already joined" });
     }
 
-    res.status(200).json({ message: "Joined Server" });
+    return res.status(200).json({ message: "Joined Server" });
   } catch (error) {
-    res.status(400).json({ message: "Error" });
+    return res.status(400).json({ message: "Error" });
   }
 };
 
