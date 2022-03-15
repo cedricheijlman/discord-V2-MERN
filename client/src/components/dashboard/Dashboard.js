@@ -65,15 +65,27 @@ function Dashboard({ setServerModal }) {
           if (res.data.message == "Server already joined") {
             console.log("already");
             setJoinServerMsg("Already Joined Server!");
+            setJoinServerInput("");
+            setTimeout(() => {
+              setJoinServerMsg("");
+            }, 2000);
           }
 
           if (res.data.message == "Server doesn't exist") {
             setJoinServerMsg("Server doesn't exist!");
+            setJoinServerInput("");
+            setTimeout(() => {
+              setJoinServerMsg("");
+            }, 2000);
           }
         })
         .catch((err) => {
           console.log(err);
           setJoinServerMsg("That's not a server ID!");
+          setJoinServerInput("");
+          setTimeout(() => {
+            setJoinServerMsg("");
+          }, 2000);
         });
     }
   };
