@@ -14,7 +14,7 @@ export const AddFriendSection = () => {
   };
 
   const handleAddFriend = () => {
-    Axios.post("http://localhost:3001/addFriend", {
+    Axios.post(`${process.env.REACT_APP_HOST}addFriend`, {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: addFriendInput,
     })

@@ -44,7 +44,7 @@ function Dashboard({ setServerModal }) {
   };
   // validate User
   useEffect(() => {
-    Axios.post("http://localhost:3001/validateUser", {
+    Axios.post(`${process.env.REACT_APP_HOST}validateUser`, {
       accessTokenKey: localStorage.getItem("accessKey"),
     })
       .then(async (result) => {
@@ -66,7 +66,7 @@ function Dashboard({ setServerModal }) {
 
   // get users servers/groups
   useEffect(() => {
-    Axios.post("http://localhost:3001/getUserJoinedServers", {
+    Axios.post(`${process.env.REACT_APP_HOST}getUserJoinedServers`, {
       accessKey: localStorage.getItem("accessKey"),
     }).then((res) => {
       setAllServers(res.data.allServers);
@@ -78,7 +78,7 @@ function Dashboard({ setServerModal }) {
   // Handle Join Server
   const handleJoinServer = () => {
     if (joinServerInput !== "" && joinServerInput !== null) {
-      Axios.post("http://localhost:3001/joinServer", {
+      Axios.post(`${process.env.REACT_APP_HOST}joinServer`, {
         accessKey: localStorage.getItem("accessKey"),
         serverId: joinServerInput,
       })

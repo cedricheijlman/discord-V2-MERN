@@ -9,7 +9,7 @@ function Login() {
   // check if user already logged in
   useEffect(() => {
     if (localStorage.getItem("accessKey")) {
-      Axios.post("http://localhost:3001/validateUser", {
+      Axios.post(`${process.env.REACT_APP_HOST}validateUser`, {
         accessTokenKey: localStorage.getItem("accessKey"),
       })
         .then((result) => {
@@ -32,7 +32,7 @@ function Login() {
   // handle login
   const handleLogin = () => {
     if (email && password && email !== "" && password !== "") {
-      Axios.post("http://localhost:3001/login", {
+      Axios.post(`${process.env.REACT_APP_HOST}login`, {
         email: email,
         password: password,
       })

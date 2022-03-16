@@ -45,7 +45,7 @@ export const PrivateMessage = () => {
 
   // Post Request Private Message
   useEffect(() => {
-    Axios.post("http://localhost:3001/privateMessage", {
+    Axios.post(`${process.env.REACT_APP_HOST}privateMessage`, {
       accessKey: localStorage.getItem("accessKey"),
       friend: id,
     })

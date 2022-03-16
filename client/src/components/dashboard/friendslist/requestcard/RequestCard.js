@@ -4,7 +4,7 @@ import Axios from "axios";
 
 export const RequestCard = ({ request, setChange, change }) => {
   const handleAcceptRequest = () => {
-    Axios.post("http://localhost:3001/addFriend", {
+    Axios.post(`${process.env.REACT_APP_HOST}addFriend`, {
       accessKey: localStorage.getItem("accessKey"),
       friendUsername: request.username,
     }).then((res) => {
@@ -13,7 +13,7 @@ export const RequestCard = ({ request, setChange, change }) => {
   };
 
   const handleDeleteRequest = () => {
-    Axios.delete("http://localhost:3001/deleteFriend", {
+    Axios.delete(`${process.env.REACT_APP_HOST}deleteFriend`, {
       data: {
         accessKey: localStorage.getItem("accessKey"),
         friend: request._id,

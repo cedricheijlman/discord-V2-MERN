@@ -20,7 +20,7 @@ export const Server = () => {
   // When user on Server Page
   useEffect(() => {
     console.log(id);
-    Axios.post("http://localhost:3001/openServer", {
+    Axios.post(`${process.env.REACT_APP_HOST}openServer`, {
       accessKey: localStorage.getItem("accessKey"),
       serverId: id,
     })

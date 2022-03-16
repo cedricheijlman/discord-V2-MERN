@@ -6,7 +6,7 @@ export const AllFriendsSection = () => {
   const [allFriends, setAllFriends] = useState([]);
 
   useEffect(() => {
-    Axios.post("http://localhost:3001/allFriends", {
+    Axios.post(`${process.env.REACT_APP.HOST}allFriends`, {
       accessKey: localStorage.getItem("accessKey"),
     })
       .then((result) => {

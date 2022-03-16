@@ -6,7 +6,7 @@ import "./friendcard.css";
 export const FriendCard = ({ username, objectId }) => {
   let navigate = useNavigate();
   const handleFriendDelete = () => {
-    Axios.delete("http://localhost:3001/deleteFriend", {
+    Axios.delete(`${process.env.REACT_APP_HOST}deleteFriend`, {
       data: {
         accessKey: localStorage.getItem("accessKey"),
         friend: objectId,

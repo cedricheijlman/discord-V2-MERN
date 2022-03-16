@@ -11,7 +11,7 @@ const ServerInfo = ({ serverInfo, setServerInfo }) => {
 
   const handleLeaveServer = () => {
     console.log("Leave server");
-    Axios.post("http://localhost:3001/leaveServer", {
+    Axios.post(`${process.env.REACT_APP_HOST}leaveServer`, {
       accessKey: localStorage.getItem("accessKey"),
       serverId: serverInfo._id,
     })

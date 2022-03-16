@@ -16,7 +16,7 @@ import Axios from "axios";
 function App() {
   // Create Server Handle
   const handleCreateServer = () => {
-    Axios.post("http://localhost:3001/createServer", {
+    Axios.post(`${process.env.REACT_APP_HOST}createServer`, {
       accessKey: localStorage.getItem("accessKey"),
       serverName: serverNameInput,
       private: false,
