@@ -7,9 +7,20 @@ import { GroupItem } from "./GroupItem";
 import io from "socket.io-client";
 import ServerInfo from "./servers/ServerInfo";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BeatLoader from "react-spinners/BeatLoader";
+
 const socket = io.connect("http://localhost:3001");
 
 function Dashboard({ setServerModal }) {
+  const [beginLoading, setBeginLoading] = useState(false);
+
+  useEffect(() => {
+    setBeginLoading(true);
+    setTimeout(() => {
+      setBeginLoading(false);
+    }, 1000);
+  }, []);
+
   const [selectedGroup, setSelectedGroup] = useState("home");
   const [username, setUsername] = useState("");
   const [allServers, setAllServers] = useState([]);
@@ -95,102 +106,113 @@ function Dashboard({ setServerModal }) {
   };
 
   return (
-    <div id="dashboard">
-      <div className="groupsLeftDashboard">
-        <GroupItem
-          selected={selectedGroup}
-          setSelectedGroup={setSelectedGroup}
-          name="home"
-        />
-        <div className="joinedGroupsDashboard">
-          {allServers.map((item, index) => {
-            return (
+    <>
+      {beginLoading ? (
+        <div className="loadingScreen">
+          <BeatLoader color={"grey"} loading={beginLoading} size={20} />
+        </div>
+      ) : (
+        <div id="dashboard">
+          <div className="groupsLeftDashboard">
+            <GroupItem
+              selected={selectedGroup}
+              setSelectedGroup={setSelectedGroup}
+              name="home"
+            />
+            <div className="joinedGroupsDashboard">
+              {allServers.map((item, index) => {
+                return (
+                  <GroupItem
+                    key={index}
+                    serverId={item._id}
+                    selected={selectedGroup}
+                    setSelectedGroup={setSelectedGroup}
+                    name={item.name}
+                    serverName={item.serverName}
+                  />
+                );
+              })}
               <GroupItem
-                key={index}
-                serverId={item._id}
                 selected={selectedGroup}
                 setSelectedGroup={setSelectedGroup}
-                name={item.name}
-                serverName={item.serverName}
+                name="add"
+                setServerModal={setServerModal}
               />
-            );
-          })}
-          <GroupItem
-            selected={selectedGroup}
-            setSelectedGroup={setSelectedGroup}
-            name="add"
-            setServerModal={setServerModal}
-          />
-          <div
-            onClick={() => {
-              handleLogout();
-            }}
-            className="dashboard__homeButtonSelect"
-          >
-            <div
-              title="Logout"
-              style={{ backgroundColor: "darkred", color: "white" }}
-              className="dashboard__homeButton"
-            >
-              <LogoutIcon />
+              <div
+                onClick={() => {
+                  handleLogout();
+                }}
+                className="dashboard__homeButtonSelect"
+              >
+                <div
+                  title="Logout"
+                  style={{ backgroundColor: "darkred", color: "white" }}
+                  className="dashboard__homeButton"
+                >
+                  <LogoutIcon />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="leftDashboard">
-        {pathName == "me" && (
-          // If on homepage
-          <>
-            <div className="friendsItem">Join Server With Server ID</div>
-            <input
-              value={joinServerInput}
-              onChange={(e) => {
-                if (e.nativeEvent.data !== " ") {
-                  setJoinServerInput(e.target.value);
-                }
-              }}
-              className="serverAddInput"
-              onKeyPress={(e) => {
-                if (e.code == "Enter") {
-                  handleJoinServer();
-                }
-              }}
-              placeholder="Enter Server ID"
-            />
-            {joinServerMsg !== "" && (
-              <h3
-                style={{
-                  margin: "10px 10px",
-                  color: "white",
-                  fontStyle: "italic",
-                  textAlign: "center",
-                }}
-              >
-                {joinServerMsg}
-              </h3>
+          <div className="leftDashboard">
+            {pathName == "me" && (
+              // If on homepage
+              <>
+                <div className="friendsItem">Join Server With Server ID</div>
+                <input
+                  value={joinServerInput}
+                  onChange={(e) => {
+                    if (e.nativeEvent.data !== " ") {
+                      setJoinServerInput(e.target.value);
+                    }
+                  }}
+                  className="serverAddInput"
+                  onKeyPress={(e) => {
+                    if (e.code == "Enter") {
+                      handleJoinServer();
+                    }
+                  }}
+                  placeholder="Enter Server ID"
+                />
+                {joinServerMsg !== "" && (
+                  <h3
+                    style={{
+                      margin: "10px 10px",
+                      color: "white",
+                      fontStyle: "italic",
+                      textAlign: "center",
+                    }}
+                  >
+                    {joinServerMsg}
+                  </h3>
+                )}
+              </>
             )}
-          </>
-        )}
 
-        {pathName !== "me" && (
-          <>
-            <ServerInfo serverInfo={serverInfo} setServerInfo={setServerInfo} />
-          </>
-        )}
-      </div>
-      <div className="rightDashboard">
-        <Outlet
-          context={{
-            socket,
-            username,
-            serverInfo,
-            setServerInfo,
-            setSelectedGroup,
-          }}
-        />
-      </div>
-    </div>
+            {pathName !== "me" && (
+              <>
+                <ServerInfo
+                  serverInfo={serverInfo}
+                  setServerInfo={setServerInfo}
+                />
+              </>
+            )}
+          </div>
+          <div className="rightDashboard">
+            <Outlet
+              context={{
+                socket,
+                username,
+                serverInfo,
+                setServerInfo,
+                setSelectedGroup,
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
