@@ -10,7 +10,6 @@ const ServerInfo = ({ serverInfo, setServerInfo }) => {
   let navigate = useNavigate();
 
   const handleLeaveServer = () => {
-    console.log("Leave server");
     Axios.post(`${process.env.REACT_APP_HOST}leaveServer`, {
       accessKey: localStorage.getItem("accessKey"),
       serverId: serverInfo._id,

@@ -82,7 +82,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("user discconected");
     onlineUsers = onlineUsers.filter((id) => id !== socket.userId);
   });
 });

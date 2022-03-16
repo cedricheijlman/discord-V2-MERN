@@ -70,7 +70,6 @@ function Dashboard({ setServerModal }) {
       accessKey: localStorage.getItem("accessKey"),
     }).then((res) => {
       setAllServers(res.data.allServers);
-      console.log(res.data.allServers);
     });
   }, []);
 
@@ -83,9 +82,7 @@ function Dashboard({ setServerModal }) {
         serverId: joinServerInput,
       })
         .then((res) => {
-          console.log(res);
           if (res.data.message == "Server already joined") {
-            console.log("already");
             setJoinServerMsg("Already Joined Server!");
             setJoinServerInput("");
             setTimeout(() => {
@@ -102,7 +99,6 @@ function Dashboard({ setServerModal }) {
           }
         })
         .catch((err) => {
-          console.log(err);
           setJoinServerMsg("That's not a server ID!");
           setJoinServerInput("");
           setTimeout(() => {

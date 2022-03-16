@@ -19,7 +19,6 @@ export const Server = () => {
 
   // When user on Server Page
   useEffect(() => {
-    console.log(id);
     Axios.post(`${process.env.REACT_APP_HOST}openServer`, {
       accessKey: localStorage.getItem("accessKey"),
       serverId: id,
@@ -61,7 +60,6 @@ export const Server = () => {
 
   useEffect(async () => {
     await socket.on("message_recievedServer", (messageInput) => {
-      console.log(messageInput);
       setServerMessages((messages) => [...messages, messageInput]);
     });
   }, [socket]);

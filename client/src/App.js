@@ -22,7 +22,6 @@ function App() {
       private: false,
       password: "",
     }).then((res) => {
-      console.log(res.data);
       window.location.pathname = "/servers/" + res.data.newServer._id;
     });
   };

@@ -16,7 +16,6 @@ const getUserJoinedServers = async (req, res) => {
     // send all servers Info's back
     res.status(200).json({ message: "all servers", allServers });
   } catch (error) {
-    console.log(error);
     res.status(200).json({ message: "error" });
   }
 };
@@ -80,7 +79,6 @@ const openServer = async (req, res) => {
     // send server info back
     res.status(200).json({ message: "Open Server", serverInfo });
   } catch (error) {
-    console.log(error);
     res.status(400).json({ message: "Error" });
   }
 };
@@ -130,7 +128,6 @@ const createServer = async (req, res) => {
     // Return Server Info Created Message
     return res.status(200).json({ message: "Created Server", newServer });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error" });
   }
 };
