@@ -110,111 +110,110 @@ function Dashboard({ setServerModal }) {
 
   return (
     <>
-      {beginLoading ? (
+      {beginLoading && (
         <div className="loadingScreen">
           <RingLoader color={"lightgrey"} loading={beginLoading} size={100} />
         </div>
-      ) : (
-        <div id="dashboard">
-          <div className="groupsLeftDashboard">
+      )}
+      <div id="dashboard">
+        <div className="groupsLeftDashboard">
+          <GroupItem
+            selected={selectedGroup}
+            setSelectedGroup={setSelectedGroup}
+            name="home"
+          />
+          <div className="joinedGroupsDashboard">
+            {allServers.map((item, index) => {
+              return (
+                <GroupItem
+                  key={index}
+                  serverId={item._id}
+                  selected={selectedGroup}
+                  setSelectedGroup={setSelectedGroup}
+                  name={item.name}
+                  serverName={item.serverName}
+                />
+              );
+            })}
             <GroupItem
               selected={selectedGroup}
               setSelectedGroup={setSelectedGroup}
-              name="home"
+              name="add"
+              setServerModal={setServerModal}
             />
-            <div className="joinedGroupsDashboard">
-              {allServers.map((item, index) => {
-                return (
-                  <GroupItem
-                    key={index}
-                    serverId={item._id}
-                    selected={selectedGroup}
-                    setSelectedGroup={setSelectedGroup}
-                    name={item.name}
-                    serverName={item.serverName}
-                  />
-                );
-              })}
-              <GroupItem
-                selected={selectedGroup}
-                setSelectedGroup={setSelectedGroup}
-                name="add"
-                setServerModal={setServerModal}
-              />
+            <div
+              onClick={() => {
+                handleLogout();
+              }}
+              className="dashboard__homeButtonSelect"
+            >
               <div
-                onClick={() => {
-                  handleLogout();
-                }}
-                className="dashboard__homeButtonSelect"
+                title="Logout"
+                style={{ backgroundColor: "darkred", color: "white" }}
+                className="dashboard__homeButton"
               >
-                <div
-                  title="Logout"
-                  style={{ backgroundColor: "darkred", color: "white" }}
-                  className="dashboard__homeButton"
-                >
-                  <LogoutIcon />
-                </div>
+                <LogoutIcon />
               </div>
             </div>
           </div>
-
-          <div className="leftDashboard">
-            {pathName == "me" && (
-              // If on homepage
-              <>
-                <div className="friendsItem">Join Server With Server ID</div>
-                <input
-                  value={joinServerInput}
-                  onChange={(e) => {
-                    if (e.nativeEvent.data !== " ") {
-                      setJoinServerInput(e.target.value);
-                    }
-                  }}
-                  className="serverAddInput"
-                  onKeyPress={(e) => {
-                    if (e.code == "Enter") {
-                      handleJoinServer();
-                    }
-                  }}
-                  placeholder="Enter Server ID"
-                />
-                {joinServerMsg !== "" && (
-                  <h3
-                    style={{
-                      margin: "10px 10px",
-                      color: "white",
-                      fontStyle: "italic",
-                      textAlign: "center",
-                    }}
-                  >
-                    {joinServerMsg}
-                  </h3>
-                )}
-              </>
-            )}
-
-            {pathName !== "me" && (
-              <>
-                <ServerInfo
-                  serverInfo={serverInfo}
-                  setServerInfo={setServerInfo}
-                />
-              </>
-            )}
-          </div>
-          <div className="rightDashboard">
-            <Outlet
-              context={{
-                socket,
-                username,
-                serverInfo,
-                setServerInfo,
-                setSelectedGroup,
-              }}
-            />
-          </div>
         </div>
-      )}
+
+        <div className="leftDashboard">
+          {pathName == "me" && (
+            // If on homepage
+            <>
+              <div className="friendsItem">Join Server With Server ID</div>
+              <input
+                value={joinServerInput}
+                onChange={(e) => {
+                  if (e.nativeEvent.data !== " ") {
+                    setJoinServerInput(e.target.value);
+                  }
+                }}
+                className="serverAddInput"
+                onKeyPress={(e) => {
+                  if (e.code == "Enter") {
+                    handleJoinServer();
+                  }
+                }}
+                placeholder="Enter Server ID"
+              />
+              {joinServerMsg !== "" && (
+                <h3
+                  style={{
+                    margin: "10px 10px",
+                    color: "white",
+                    fontStyle: "italic",
+                    textAlign: "center",
+                  }}
+                >
+                  {joinServerMsg}
+                </h3>
+              )}
+            </>
+          )}
+
+          {pathName !== "me" && (
+            <>
+              <ServerInfo
+                serverInfo={serverInfo}
+                setServerInfo={setServerInfo}
+              />
+            </>
+          )}
+        </div>
+        <div className="rightDashboard">
+          <Outlet
+            context={{
+              socket,
+              username,
+              serverInfo,
+              setServerInfo,
+              setSelectedGroup,
+            }}
+          />
+        </div>
+      </div>
     </>
   );
 }
