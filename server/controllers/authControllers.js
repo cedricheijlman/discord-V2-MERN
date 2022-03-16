@@ -46,7 +46,7 @@ const postRegister = async (req, res) => {
     const UserEmailExists = await User.exists({ email: email.toLowerCase() });
 
     if (UserEmailExists) {
-      return res.status(409).send("email already in use");
+      return res.status(200).json({ message: "Email already in use" });
     }
 
     const UsernameExists = await User.exists({
@@ -54,7 +54,7 @@ const postRegister = async (req, res) => {
     });
 
     if (UsernameExists) {
-      return res.status(401).json({ message: "Username Exists" });
+      return res.status(200).json({ message: "Username already in use" });
     }
 
     // encrypt password

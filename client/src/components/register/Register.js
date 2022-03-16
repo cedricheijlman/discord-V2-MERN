@@ -7,6 +7,7 @@ function Register() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [username, setUsername] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // check if user already logged in
   useEffect(() => {
@@ -42,13 +43,21 @@ function Register() {
         email,
         password,
         username,
-      }).then(async (result) => {
-        if (result.status == 201) {
-          localStorage.setItem("accessKey", result.data.accessToken);
-          localStorage.setItem("userId", result.data.id);
-          navigate("/dashboard");
-        }
-      });
+      })
+        .then(async (result) => {
+          if (result.status == 201) {
+            localStorage.setItem("accessKey", result.data.accessToken);
+            localStorage.setItem("userId", result.data.id);
+            navigate("/dashboard");
+          }
+
+          if (result.status == 200) {
+            setErrorMessage(result.data.message);
+          }
+        })
+        .catch(() => {
+          window.location.reload();
+        });
     }
   };
 
@@ -82,6 +91,7 @@ function Register() {
         <div className="inputDiv">
           <span>Password</span>
           <input
+            type={"password"}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
                 handleRegister();
@@ -94,6 +104,7 @@ function Register() {
             }}
           />
         </div>
+        <p style={{ marginBottom: 10, color: "red" }}>{errorMessage}</p>
         <p>
           Already have an account?{" "}
           <span>
