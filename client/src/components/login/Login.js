@@ -5,6 +5,7 @@ import "./login.css";
 import Axios from "axios";
 
 function Login() {
+  const [errorMessage, setErrorMessage] = useState("");
   // check if user already logged in
   useEffect(() => {
     if (localStorage.getItem("accessKey")) {
@@ -36,12 +37,16 @@ function Login() {
         password: password,
       })
         .then((result) => {
-          if (result.status == 200) {
+          if (result.data.message == "Logged In") {
             localStorage.setItem("accessKey", result.data.accessToken);
             localStorage.setItem("userId", result.data.id);
             setTimeout(() => {
               navigate("/dashboard");
             }, 1000);
+          }
+
+          if (result.data.message == "Invalid Email or Password") {
+            setErrorMessage(result.data.message);
           }
         })
         .catch((err) => {
@@ -83,12 +88,14 @@ function Login() {
             }}
           />
         </div>
+        <p style={{ marginBottom: 10, color: "red" }}>{errorMessage}</p>
         <p>
           Don't have an account?{" "}
           <span>
             <Link to="/register">Register</Link>
           </span>
         </p>
+
         <button onClick={handleLogin}>Log in</button>
       </div>
     </div>

@@ -18,12 +18,14 @@ const postLogin = async (req, res) => {
         }
       );
 
-      return res.status(200).json({ accessToken, id: findUser._id });
+      return res
+        .status(200)
+        .json({ message: "Logged In", accessToken, id: findUser._id });
     }
 
-    return res.status(401).json({ message: "Invalid Email or Password" });
+    return res.status(200).json({ message: "Invalid Email or Password" });
   } catch {
-    return res.status(500).json({ message: "something went wrong" });
+    return res.status(400).json({ message: "something went wrong" });
   }
 };
 
