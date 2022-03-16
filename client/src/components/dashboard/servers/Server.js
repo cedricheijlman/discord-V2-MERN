@@ -52,7 +52,7 @@ export const Server = () => {
       });
       serverMessages.push({
         message: inputMessage,
-        sentBy: { username: "cedricc" },
+        sentBy: { username: username },
       });
       setInputMessage("");
     }
