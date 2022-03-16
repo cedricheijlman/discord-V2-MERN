@@ -11,7 +11,7 @@ router.post(
   controller.getUserJoinedServers
 );
 
-router.post("/leaveServer", controller.leaveServer);
+router.post("/leaveServer", requireAuth, controller.leaveServer);
 
 router.post("/joinServer", requireAuth, controller.joinServer);
 

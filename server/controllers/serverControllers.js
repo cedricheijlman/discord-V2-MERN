@@ -87,6 +87,14 @@ const openServer = async (req, res) => {
 
 const leaveServer = async (req, res) => {
   try {
+    const { accessKey, serverId } = req.body;
+    const decodedJwt = jwt.decode(accessKey);
+
+    const removeUserFromServer = await Server.findOneAndUpdate(
+      { _id: serverId },
+      { $pull: { members: { userId: decodedJwt.id } } }
+    );
+
     res.status(200).json({ message: "Left server" });
   } catch (error) {
     res.status(400).json({ message: "Error occured" });

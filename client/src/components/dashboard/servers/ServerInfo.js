@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./serverinfo.css";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import Axios from "axios";
 
 const ServerInfo = ({ serverInfo, setServerInfo }) => {
   const [textChannel, setTextChannel] = useState("General");
 
   const handleLeaveServer = () => {
     console.log("Leave server");
+    Axios.post("http://localhost:3001/leaveServer", {
+      accessKey: localStorage.getItem("accessKey"),
+      serverId: serverInfo._id,
+    }).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
