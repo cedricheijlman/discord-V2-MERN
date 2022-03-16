@@ -7,7 +7,7 @@ import { GroupItem } from "./GroupItem";
 import io from "socket.io-client";
 import ServerInfo from "./servers/ServerInfo";
 import LogoutIcon from "@mui/icons-material/Logout";
-import BeatLoader from "react-spinners/BeatLoader";
+import RingLoader from "react-spinners/RingLoader";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -18,7 +18,7 @@ function Dashboard({ setServerModal }) {
     setBeginLoading(true);
     setTimeout(() => {
       setBeginLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
 
   const [selectedGroup, setSelectedGroup] = useState("home");
@@ -109,7 +109,7 @@ function Dashboard({ setServerModal }) {
     <>
       {beginLoading ? (
         <div className="loadingScreen">
-          <BeatLoader color={"grey"} loading={beginLoading} size={20} />
+          <RingLoader color={"lightgrey"} loading={beginLoading} size={100} />
         </div>
       ) : (
         <div id="dashboard">
