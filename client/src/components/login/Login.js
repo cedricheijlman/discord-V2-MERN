@@ -39,7 +39,9 @@ function Login() {
           if (result.status == 200) {
             localStorage.setItem("accessKey", result.data.accessToken);
             localStorage.setItem("userId", result.data.id);
-            navigate("/dashboard");
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 1000);
           }
         })
         .catch((err) => {

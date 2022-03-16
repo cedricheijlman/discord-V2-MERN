@@ -12,6 +12,7 @@ import RingLoader from "react-spinners/RingLoader";
 const socket = io.connect("http://localhost:3001");
 
 function Dashboard({ setServerModal }) {
+  let navigate = useNavigate();
   const [beginLoading, setBeginLoading] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,12 @@ function Dashboard({ setServerModal }) {
     setTimeout(() => {
       setBeginLoading(false);
     }, 2000);
+  }, []);
+
+  useEffect(() => {
+    if (window.location.pathname == "" || window.location.pathname == "/") {
+      navigate("/me/friends");
+    }
   }, []);
 
   const [selectedGroup, setSelectedGroup] = useState("home");
@@ -30,7 +37,7 @@ function Dashboard({ setServerModal }) {
 
   // to check if it equals the home page  /me/
   const pathName = window.location.pathname.slice(1, 3);
-  let navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("accessKey");
     navigate("/login");
