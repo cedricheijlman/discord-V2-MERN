@@ -72,9 +72,6 @@ export const PrivateMessage = () => {
     <div id="privateMessage">
       <div id="privateMessage__header">
         <div className="privateMessage__headerLeft">{friendInfo.username}</div>
-        <div className="privateMessage__headerRight">
-          <input placeholder="Search Message" />
-        </div>
       </div>
       <ScrollToBottom className="privateMessage__box">
         {messages &&
