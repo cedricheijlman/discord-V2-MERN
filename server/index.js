@@ -25,7 +25,7 @@ app.use("/", friendsRoutes);
 app.use("/", serverRoutes);
 
 const io = new Server(server, {
-  cors: { origin: "http://localhost:3000" },
+  cors: { origin: process.env.sitename },
 });
 
 let onlineUsers = [];
