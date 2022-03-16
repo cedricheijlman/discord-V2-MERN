@@ -37,6 +37,11 @@
   background-color: rgb(67, 96, 194);
   border: none;
   color: white;
+  transition: all 0.4s;
+}
+
+.loginBox button:hover {
+  transform: scale(1.01);
 }
 
 .inputDiv {
