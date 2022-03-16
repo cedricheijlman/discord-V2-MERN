@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
 });
 
 mongoose.connect(process.env.DB).then(() => {
-  server.listen(3001, () => {
+  server.listen(process.env.PORT, () => {
     console.log(`running on port 3001`);
   });
 });
