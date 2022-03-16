@@ -6,6 +6,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { GroupItem } from "./GroupItem";
 import io from "socket.io-client";
 import ServerInfo from "./servers/ServerInfo";
+import LogoutIcon from "@mui/icons-material/Logout";
 const socket = io.connect("http://localhost:3001");
 
 function Dashboard({ setServerModal }) {
@@ -19,7 +20,10 @@ function Dashboard({ setServerModal }) {
   // to check if it equals the home page  /me/
   const pathName = window.location.pathname.slice(1, 3);
   let navigate = useNavigate();
-
+  const handleLogout = () => {
+    localStorage.removeItem("accessKey");
+    navigate("/login");
+  };
   // validate User
   useEffect(() => {
     Axios.post("http://localhost:3001/validateUser", {
@@ -117,6 +121,20 @@ function Dashboard({ setServerModal }) {
             name="add"
             setServerModal={setServerModal}
           />
+          <div
+            onClick={() => {
+              handleLogout();
+            }}
+            className="dashboard__homeButtonSelect"
+          >
+            <div
+              title="Logout"
+              style={{ backgroundColor: "darkred", color: "white" }}
+              className="dashboard__homeButton"
+            >
+              <LogoutIcon />
+            </div>
+          </div>
         </div>
       </div>
 

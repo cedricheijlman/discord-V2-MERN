@@ -36,6 +36,11 @@
   display: flex;
   cursor: pointer;
   border-radius: 10px;
+  transition: all 0.4s;
+}
+
+.dashboard__homeButton:hover {
+  transform: scale(1.05);
 }
 
 .dashboard__homeButtonSelect {
