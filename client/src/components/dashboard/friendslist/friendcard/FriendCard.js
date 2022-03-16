@@ -27,7 +27,6 @@ export const FriendCard = ({ username, objectId }) => {
   return (
     <div id="friendCard">
       <div className="friendCard__left">
-        <img src="./logo192.png" />
         <h2>{username}</h2>
       </div>
       <div className="friendCard__right">
