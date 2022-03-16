@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./serverinfo.css";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const ServerInfo = ({ serverInfo, setServerInfo }) => {
   const [textChannel, setTextChannel] = useState("General");
+
+  const handleLeaveServer = () => {
+    console.log("Leave server");
+  };
+
   return (
     <div id="serverInfo">
       <div className="serverInfo__serverName">
         <h2>{serverInfo.serverName ? serverInfo.serverName : "Server"}</h2>
+        <ExitToAppIcon
+          onClick={() => {
+            handleLeaveServer();
+          }}
+          className="leaveServerIcon"
+        />
       </div>
       <div className="serverInfo__textChannelsContainer">
         <p>Text Channels</p>

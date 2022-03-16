@@ -85,10 +85,18 @@ const openServer = async (req, res) => {
   }
 };
 
+const leaveServer = async (req, res) => {
+  try {
+    res.status(200).json({ message: "Left server" });
+  } catch (error) {
+    res.status(400).json({ message: "Error occured" });
+  }
+};
+
 const createServer = async (req, res) => {
   try {
     // Decode JWT Token
-    const { accessKey, serverName, private, password } = req.body;
+    let { accessKey, serverName, private, password } = req.body;
     const decodedJwt = jwt.decode(accessKey);
 
     // set serverName to lowercase
@@ -114,6 +122,7 @@ const createServer = async (req, res) => {
     // Return Server Info Created Message
     return res.status(200).json({ message: "Created Server", newServer });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ message: "Error" });
   }
 };
@@ -123,4 +132,5 @@ module.exports = {
   openServer,
   getUserJoinedServers,
   joinServer,
+  leaveServer,
 };
