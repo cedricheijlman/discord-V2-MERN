@@ -9,7 +9,7 @@ import ServerInfo from "./servers/ServerInfo";
 import LogoutIcon from "@mui/icons-material/Logout";
 import RingLoader from "react-spinners/RingLoader";
 
-const socket = io.connect(process.env.backendSite);
+const socket = io.connect(process.env.REACT_APP_BACKENDSITE);
 
 function Dashboard({ setServerModal }) {
   let navigate = useNavigate();
