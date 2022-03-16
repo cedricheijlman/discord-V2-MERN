@@ -21,9 +21,13 @@ function App() {
       serverName: serverNameInput,
       private: false,
       password: "",
-    }).then((res) => {
-      window.location.pathname = "/servers/" + res.data.newServer._id;
-    });
+    })
+      .then((res) => {
+        window.location.pathname = "/servers/" + res.data.newServer._id;
+      })
+      .catch((err) => {
+        window.location.pathname = "/login";
+      });
   };
 
   // Create Server Modal Styles

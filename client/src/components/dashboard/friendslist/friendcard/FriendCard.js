@@ -11,9 +11,13 @@ export const FriendCard = ({ username, objectId }) => {
         accessKey: localStorage.getItem("accessKey"),
         friend: objectId,
       },
-    }).then((result) => {
-      window.location.reload();
-    });
+    })
+      .then((result) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        window.location.pathname = "/login";
+      });
   };
 
   const handleMessagePage = () => {
